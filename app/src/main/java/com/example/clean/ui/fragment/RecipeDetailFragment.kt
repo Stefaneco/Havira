@@ -5,52 +5,74 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.clean.R
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.example.clean.ui.adapter.RecipeDetailCategoryAdapter
+import com.example.clean.ui.adapter.RecipeItemAdapter
+import com.example.clean.ui.viewmodel.RecipeDetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_recipe_add.*
+import kotlinx.android.synthetic.main.fragment_recipe_detail.*
+import kotlinx.android.synthetic.main.fragment_recipe_detail.rv_items
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RecipeDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class RecipeDetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val viewModel by viewModels<RecipeDetailViewModel>()
+    private val categoriesAdapter = RecipeDetailCategoryAdapter()
+    private val itemsAdapter = RecipeItemAdapter(listOf())
+    private val args: RecipeDetailFragmentArgs by navArgs()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_recipe_detail, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RecipeDetailFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic fun newInstance(param1: String, param2: String) =
-                RecipeDetailFragment().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.loadRecipe(args.recipeName)
+
+        rv_items.apply {
+            adapter = itemsAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+        rv_selectedCategoriesRecipe.apply {
+            adapter = categoriesAdapter
+            layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+        }
+        b_edit.setOnClickListener {
+            val action = RecipeDetailFragmentDirections.actionRecipeDetailFragmentToRecipeAddFragment(tv_name.text.toString())
+            findNavController().navigate(action)
+        }
+        b_makeRecipeDetail.setOnClickListener {
+            viewModel.makeRecipe()
+        }
+
+        observeViewModel()
+
     }
+
+    private fun observeViewModel(){
+        viewModel.recipe.observe(viewLifecycleOwner, Observer {
+            tv_name.text = it.name
+            tv_rating.text = it.rating.toString()
+            tv_time.text = it.cookTime.toString()
+            tv_servings.text = it.servings.toString()
+            tv_instructions.text = it.description
+            itemsAdapter.updateItems(it.items)
+            it.categories.let { it1 -> categoriesAdapter.updateCategories(it1) }
+        })
+    }
+
+
+
 }

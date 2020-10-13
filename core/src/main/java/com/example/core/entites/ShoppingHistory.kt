@@ -1,4 +1,6 @@
 package com.example.core.entites
 
-class ShoppingHistory {
-}
+data class ShoppingHistory (
+    val date: String,
+    val items: List<ShoppingItem>
+)

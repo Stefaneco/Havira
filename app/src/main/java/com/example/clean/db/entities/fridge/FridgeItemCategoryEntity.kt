@@ -1,9 +1,11 @@
-package com.example.clean.db.entities
+package com.example.clean.db.entities.fridge
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.example.core.entites.FridgeItem
 
 @Entity
 data class FridgeItemCategoryEntity(
-    val categoryId: Int,
-    val name: String
+    @PrimaryKey
+    val categoryName: String
 )

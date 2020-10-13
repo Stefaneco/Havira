@@ -1,4 +1,4 @@
-package com.example.core.usecase
+package com.example.core.usecase.shopping
 
 import com.example.core.entites.ShoppingItem
 import com.example.core.repository.ShoppingRepository
@@ -6,7 +6,7 @@ import com.example.core.repository.ShoppingRepository
 class AddShoppingItem(private val shoppingRepository: ShoppingRepository) {
     suspend operator fun invoke(item: ShoppingItem){
 
-        shoppingRepository.getShoppingItemByNameAndUnit(item.name,item.unit)?.let {
+        shoppingRepository.getShoppingItemByNameUnitAndRecipeName(item.name,item.unit,item.recipeName)?.let {
             item.amount += it.amount
         }
 

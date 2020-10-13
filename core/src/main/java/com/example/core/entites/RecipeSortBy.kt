@@ -1,8 +1,8 @@
 package com.example.core.entites
 
-enum class SortBy(){
+enum class RecipeSortBy(){
     NAME,
     RATING,
     COOK_TIME,
-
+    MISSING_ITEMS_REVERSED
 }

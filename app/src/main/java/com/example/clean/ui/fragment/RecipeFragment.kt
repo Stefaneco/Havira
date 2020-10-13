@@ -1,60 +1,132 @@
 package com.example.clean.ui.fragment
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.clean.R
+import com.example.clean.ui.adapter.*
+import com.example.clean.ui.dialog.RecipeSortByDialog
+import com.example.clean.ui.dialog.RecipeSortByListener
+import com.example.clean.ui.viewmodel.RecipeViewModel
+import com.example.core.entites.RecipeSortBy
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_recipe.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+@AndroidEntryPoint
+class RecipeFragment : Fragment(), ItemDetailAction, RecipeCategoryAction {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RecipeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class RecipeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val viewModel by viewModels<RecipeViewModel>()
+    private val recipeAdapter = RecipeAdapter(listOf(), this)
+    private val categoriesAdapter = RecipeCategoryAdapter(this)
+    private val selectedCategoriesAdapter = RecipeSelectedCategoryAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_recipe, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RecipeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RecipeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        observeViewModel()
+        setupRecyclerViews()
+        setupButtonsOnClicks()
+        setupCategorySearch()
+
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadCategoriesAndRecipes()
+        observeViewModel()
+    }
+
+    override fun onItemClick(name: String) {
+        val action = RecipeFragmentDirections.actionRecipeFragmentToRecipeDetailFragment(name)
+        findNavController().navigate(action)
+    }
+
+    override fun checkCategory(category: String) {
+        viewModel.checkCategory(category)
+    }
+
+    override fun uncheckCategory(category: String) {
+        viewModel.uncheckCategory(category)
+    }
+
+    private fun observeViewModel(){
+        viewModel.filteredRecipes.observe(viewLifecycleOwner, Observer { it ->
+            recipeAdapter.updateItems(it)
+        })
+        viewModel.selectedCategories.observe(viewLifecycleOwner, Observer {
+            selectedCategoriesAdapter.updateCategories(it)
+        })
+        viewModel.notSelectedCategoriesFiltered.observe(viewLifecycleOwner, Observer {
+            categoriesAdapter.updateCategories(it)
+        })
+    }
+
+    private fun setupRecyclerViews(){
+        rv_recipes.layoutManager = LinearLayoutManager(context)
+        rv_recipes.adapter = recipeAdapter
+        rv_recipes.setHasFixedSize(true)
+
+        rv_categoriesRecipe.apply {
+            adapter = categoriesAdapter
+            layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+        }
+        rv_selectedCategoriesRecipe.apply {
+            adapter = selectedCategoriesAdapter
+            layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+        }
+
+    }
+
+    private fun setupButtonsOnClicks(){
+        b_addRecipe.setOnClickListener {
+            val action = RecipeFragmentDirections.actionRecipeFragmentToRecipeAddFragment(null)
+            findNavController().navigate(action)
+        }
+        b_categories.setOnClickListener {
+            if(et_searchCategoryRecipe.visibility == View.GONE){
+                rv_categoriesRecipe.visibility = View.VISIBLE
+                rv_selectedCategoriesRecipe.visibility = View.VISIBLE
+                et_searchCategoryRecipe.visibility = View.VISIBLE
+            }
+            else{
+                rv_categoriesRecipe.visibility = View.GONE
+                rv_selectedCategoriesRecipe.visibility = View.GONE
+                et_searchCategoryRecipe.visibility = View.GONE
+            }
+        }
+        b_sortByRecipe.setOnClickListener {
+            RecipeSortByDialog(requireContext(), object : RecipeSortByListener{
+                override fun sortByOptionClicked(option: RecipeSortBy) {
+                    viewModel.sortRecipes(option)
+                }
+            }).show()
+        }
+    }
+
+    private fun setupCategorySearch(){
+        et_searchCategoryRecipe.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                viewModel.setCategoryFilter(s.toString())
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+    }
+
 }

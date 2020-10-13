@@ -1,4 +1,8 @@
 package com.example.clean.ui.dialog
 
-interface AddInFridgeItemListner {
+import com.example.core.entites.FridgeItem
+
+interface AddInFridgeItemListener {
+    fun onAddButtonClicked(item: FridgeItem)
+
 }

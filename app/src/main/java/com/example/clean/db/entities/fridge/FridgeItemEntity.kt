@@ -1,21 +1,18 @@
-package com.example.clean.db.entities
+package com.example.clean.db.entities.fridge
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.core.entites.FridgeItem
 
-@Entity
+@Entity(primaryKeys = ["name", "unit"])
 data class FridgeItemEntity(
-    @PrimaryKey
     val name: String,
     val amount: Float,
     val unit: String,
-    val categories: List<String>,
-    val insertDate: String = ""
+    val insertDate: String? = null
 ) {
-    companion object{
-        fun fromFridgeItem(item: FridgeItem) = FridgeItemEntity(item.name,item.amount,
-            item.unit,item.categories, item.insertDate)
+    companion object {
+        fun fromFridgeItem(fridgeItem: FridgeItem) = FridgeItemEntity(
+            fridgeItem.name,fridgeItem.amount,fridgeItem.unit,fridgeItem.insertDate)
     }
-    fun toFridgeItem() = FridgeItem(name, amount, unit, insertDate, categories)
 }

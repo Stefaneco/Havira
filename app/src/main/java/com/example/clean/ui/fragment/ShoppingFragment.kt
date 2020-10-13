@@ -5,56 +5,76 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clean.R
+import com.example.clean.ui.adapter.ShoppingAdapter
+import com.example.clean.ui.adapter.ShoppingCheckAction
+import com.example.clean.ui.dialog.AddShoppingItemDialog
+import com.example.clean.ui.dialog.AddShoppingItemListener
+import com.example.clean.ui.viewmodel.FridgeViewModel
+import com.example.clean.ui.viewmodel.ShoppingViewModel
+import com.example.core.entites.ShoppingItem
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_shopping.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+@AndroidEntryPoint
+class ShoppingFragment : Fragment(), ShoppingCheckAction {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ShoppingFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ShoppingFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val viewModel by viewModels<ShoppingViewModel>()
+    private val shoppingAdapter = ShoppingAdapter(listOf(), this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_shopping, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ShoppingFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ShoppingFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observeViewModel()
+        setupRecyclerViews()
+        setupButtonsOnClicks()
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadItems()
+    }
+
+    private fun observeViewModel(){
+        viewModel.loadItems()
+        viewModel.shoppingItems.observe(viewLifecycleOwner, Observer {
+            shoppingAdapter.updateItems(it)
+        })
+    }
+
+    private fun setupButtonsOnClicks(){
+        b_addItemShopping.setOnClickListener {
+            AddShoppingItemDialog(requireContext(), object : AddShoppingItemListener{
+                override fun addShoppingItem(item: ShoppingItem) {
+                    viewModel.addShoppingItem(item)
+                }
+            }).show()
+        }
+        b_FinishShopping.setOnClickListener {
+            viewModel.moveItemsToFridge()
+        }
+    }
+
+    private fun setupRecyclerViews(){
+        rv_listShopping.apply {
+            setHasFixedSize(true)
+            adapter = shoppingAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
+
+    override fun onItemClicked(itemName: String) {
+        viewModel.changeCheckStateOfItem(itemName)
+    }
+
+
 }
