@@ -42,4 +42,10 @@ interface RecipeDao {
 
     @Query("SELECT categoryName FROM RecipeCategoriesEntity")
     fun getAllRecipeCategories(): List<String>
+
+    @Query("SELECT * FROM RecipeCatCrossRef WHERE name == :recipeName")
+    fun getRecipesCategories(recipeName: String): List<RecipeCatCrossRef>
+
+    @Query("SELECT EXISTS(SELECT * FROM recipeEntity WHERE name == :name)")
+    fun isRecipeNameInDatabase(name: String): Boolean
 }

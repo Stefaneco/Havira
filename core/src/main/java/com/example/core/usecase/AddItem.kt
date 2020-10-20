@@ -8,7 +8,7 @@ import sun.rmi.runtime.Log
 class AddItem(private val itemRepository: ItemRepository, private val recipeRepository: RecipeRepository) {
     suspend operator fun invoke(item: FridgeItem) {
 
-        itemRepository.getInFridgeItemByNameAndUnit(item.name, item.unit)?.let {
+        itemRepository.getItemByNameAndUnit(item.name, item.unit)?.let {
                 item.amount += it.amount
                 item.categories = it.categories
         }

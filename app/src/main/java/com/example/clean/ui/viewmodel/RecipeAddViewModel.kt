@@ -1,5 +1,6 @@
 package com.example.clean.ui.viewmodel
 
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,14 +24,18 @@ class RecipeAddViewModel @ViewModelInject constructor(
     private val allCategories = TreeMap<String, Boolean>()
     private var categoryFilter = ""
     val recipe = MutableLiveData<Recipe>()
+    var isNameFree = true
 
     fun addRecipe(name: String, description: String, cookTime: Int, servings: Int, rating: Int): Boolean{
         if (viewModelItems.any()) {
             val categories = allCategories.filter { it.value }.map { it.key }
-            val recipe = Recipe(name, description, viewModelItems.map { RecipeItem(it.name,it.unit,name,it.amount) },
+            val newRecipe = Recipe(name, description, viewModelItems.map { RecipeItem(it.name,it.unit,name,it.amount) },
                 cookTime, servings, rating, categories = categories)
             coroutineScope.launch {
-                useCases.addRecipe(recipe)
+                recipe.value?.let {
+                    useCases.deleteRecipe(it)
+                }
+                useCases.addRecipe(newRecipe)
             }
             return true
         }
@@ -88,6 +93,19 @@ class RecipeAddViewModel @ViewModelInject constructor(
     fun setCategoryFilter(search: String){
         categoryFilter = search
         feedLiveData()
+    }
+
+    fun isNameFreeSetter(name: String){
+        var isNameDifferentFromOriginalName = true
+        recipe.value?.name?.let {
+            if (name == it) isNameDifferentFromOriginalName = false
+        }
+        if (isNameDifferentFromOriginalName){
+            coroutineScope.launch {
+                isNameFree = !useCases.isRecipeNameInDatabase(name)
+            }
+        }
+
     }
 
 }

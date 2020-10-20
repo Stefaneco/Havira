@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -48,6 +49,7 @@ class RecipeAddFragment : Fragment(), RecipeCategoryAction {
         setupRecyclerViews()
         setupButtonsOnClicks()
         setupCategorySearch()
+        setupNameObserver()
     }
 
     override fun onResume() {
@@ -55,6 +57,7 @@ class RecipeAddFragment : Fragment(), RecipeCategoryAction {
         viewModel.loadCategories()
         args.recipeName?.let {
             viewModel.loadRecipe(it)
+
         }
 
     }
@@ -112,17 +115,34 @@ class RecipeAddFragment : Fragment(), RecipeCategoryAction {
         }
 
         b_submit.setOnClickListener {
-            if(viewModel.addRecipe(et_name.text.toString(), et_instructions.text.toString(), et_time.text.toString().toInt(),
-                    et_servings.text.toString().toInt(),et_rating.text.toString().toInt())){
-                findNavController().popBackStack()
+
+            if (!viewModel.isNameFree){
+                Toast.makeText(requireContext(), "Name of recipe already in database!", Toast.LENGTH_LONG).show()
             }
+            else if(viewModel.addRecipe(et_name.text.toString(), et_instructions.text.toString(), et_time.text.toString().toInt(),
+                    et_servings.text.toString().toInt(),et_rating.text.toString().toInt())){
+                val action = RecipeAddFragmentDirections.actionRecipeAddFragmentToRecipeFragment()
+                findNavController().navigate(action)
+            }
+            }
+
         }
-    }
+
 
     private fun setupCategorySearch(){
         et_searchCategory.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(s: Editable?) {
                 viewModel.setCategoryFilter(s.toString())
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+    }
+
+    private fun setupNameObserver(){
+        et_name.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+                viewModel.isNameFreeSetter(s.toString())
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}

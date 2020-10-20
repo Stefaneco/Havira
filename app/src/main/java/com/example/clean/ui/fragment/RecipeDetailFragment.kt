@@ -1,6 +1,7 @@
 package com.example.clean.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -56,9 +57,12 @@ class RecipeDetailFragment : Fragment() {
         b_makeRecipeDetail.setOnClickListener {
             viewModel.makeRecipe()
         }
+        b_recipeDetail_delete.setOnClickListener {
+            viewModel.deleteRecipe()
+            findNavController().popBackStack()
+        }
 
         observeViewModel()
-
     }
 
     private fun observeViewModel(){

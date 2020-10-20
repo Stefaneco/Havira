@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.clean.R
 import com.example.clean.ui.adapter.FridgeItemAdapter
+import com.example.clean.ui.adapter.FridgeItemDetailAction
 import com.example.clean.ui.dialog.AddInFridgeItemDialog
 import com.example.clean.ui.dialog.AddInFridgeItemListener
 import com.example.clean.ui.viewmodel.FridgeViewModel
@@ -19,10 +21,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_fridge.*
 
 @AndroidEntryPoint
-class FridgeFragment : Fragment() {
+class FridgeFragment : Fragment(), FridgeItemDetailAction {
 
     private val viewModel by viewModels<FridgeViewModel>()
-    private val adapter = FridgeItemAdapter(listOf())
+    private val adapter = FridgeItemAdapter(listOf(), this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,6 +79,11 @@ class FridgeFragment : Fragment() {
                 et_categoriesSearchItems.visibility = View.VISIBLE
             }
         }
+    }
+
+    override fun onItemLongClick(name: String, unit: String) {
+        val action = FridgeFragmentDirections.actionFridgeFragmentToFridgeItemDetailFragment(name,unit)
+        findNavController().navigate(action)
     }
 
 }

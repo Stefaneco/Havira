@@ -16,7 +16,6 @@ class RecipeDataSource(context: Context): IRecipeRepository {
 
     override suspend fun addRecipe(recipe: Recipe) {
         recipeDao.addRecipeEntity(RecipeEntity.fromRecipe(recipe))
-        Log.e("RecipeDataSource", recipe.missingItems.toString())
         recipeDao.upsertRecipeItems(RecipeItemEntity.fromRecipe(recipe))
         RecipeCatCrossRef.fromRecipe(recipe).let { recipeDao.addRecipeCatCrossRef(it) }
     }
@@ -34,6 +33,10 @@ class RecipeDataSource(context: Context): IRecipeRepository {
         recipeDao.deleteRecipeItems(RecipeItemEntity.fromRecipe(recipe))
     }
 
+    override suspend fun deleteRecipeCategory(recipeName: String, category: String) {
+        recipeDao.deleteRecipeCatCrossRef(listOf(RecipeCatCrossRef(recipeName,category)))
+    }
+
     override suspend fun getAll() =
         recipeDao.getAll().map { it.toRecipe() }
 
@@ -45,5 +48,8 @@ class RecipeDataSource(context: Context): IRecipeRepository {
 
     override suspend fun getAllCategories(): List<String> =
         recipeDao.getAllRecipeCategories()
+
+    override suspend fun isRecipeNameInDatabase(name: String): Boolean =
+        recipeDao.isRecipeNameInDatabase(name)
 
 }

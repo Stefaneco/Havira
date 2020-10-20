@@ -12,6 +12,9 @@ class RecipeRepository(private val iRecipeRepository: IRecipeRepository) {
 
     suspend fun deleteRecipe(recipe: Recipe) = iRecipeRepository.delete(recipe)
 
+    suspend fun deleteRecipeCategory(recipeName: String, category: String) =
+        iRecipeRepository.deleteRecipeCategory(recipeName,category)
+
     suspend fun getAll() = iRecipeRepository.getAll()
 
     suspend fun getRecipeByName(name: String) = iRecipeRepository.getByName(name)
@@ -19,5 +22,9 @@ class RecipeRepository(private val iRecipeRepository: IRecipeRepository) {
     suspend fun getRecipeItemsByName(name: String) = iRecipeRepository.getRecipeItemsByName(name)
 
     suspend fun getAllCategories() = iRecipeRepository.getAllCategories()
+
+    suspend fun isRecipeNameInDatabase(name: String) = iRecipeRepository.isRecipeNameInDatabase(name)
+
+
 
 }

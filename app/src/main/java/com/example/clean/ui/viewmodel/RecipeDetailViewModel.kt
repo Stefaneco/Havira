@@ -33,5 +33,13 @@ class RecipeDetailViewModel @ViewModelInject constructor(
         }
     }
 
+    fun deleteRecipe(){
+        CoroutineScope(Dispatchers.IO).launch {
+            recipe.value?.let {
+                useCases.deleteRecipe(it)
+            }
+        }
+    }
+
 
 }

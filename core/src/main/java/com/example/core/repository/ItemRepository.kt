@@ -14,4 +14,10 @@ class ItemRepository(private val iItemRepository: IItemRepository) {
     suspend fun getInFridgeItemByNameAndUnit(name: String, unit: String) =
         iItemRepository.getInFridgeItemByNameAndUnit(name, unit)
 
+    suspend fun getItemByNameAndUnit(name: String, unit:String) =
+        iItemRepository.getItemByNameAndUnit(name,unit)
+
+    suspend fun getAllItemsCategories() =
+        iItemRepository.getAllItemsCategories()
+
 }

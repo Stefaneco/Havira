@@ -12,6 +12,8 @@ interface IRecipeRepository{
 
     suspend fun delete(recipe: Recipe)
 
+    suspend fun deleteRecipeCategory(recipeName: String, category: String)
+
     suspend fun getAll(): List<Recipe>
 
     suspend fun getByName(name: String): Recipe?
@@ -19,5 +21,7 @@ interface IRecipeRepository{
     suspend fun getRecipeItemsByName(name: String): List<RecipeItem>
 
     suspend fun getAllCategories(): List<String>
+
+    suspend fun isRecipeNameInDatabase(name: String): Boolean
 
 }

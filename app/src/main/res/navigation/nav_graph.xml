@@ -9,7 +9,11 @@
         android:id="@+id/fridgeFragment"
         android:name="com.example.clean.ui.fragment.FridgeFragment"
         android:label="fragment_fridge"
-        tools:layout="@layout/fragment_fridge" />
+        tools:layout="@layout/fragment_fridge" >
+        <action
+            android:id="@+id/action_fridgeFragment_to_fridgeItemDetailFragment"
+            app:destination="@id/fridgeItemDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/recipeFragment"
         android:name="com.example.clean.ui.fragment.RecipeFragment"
@@ -36,6 +40,9 @@
             android:name="recipeName"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_recipeAddFragment_to_recipeFragment"
+            app:destination="@id/recipeFragment" />
     </fragment>
     <fragment
         android:id="@+id/recipeDetailFragment"
@@ -48,5 +55,17 @@
         <action
             android:id="@+id/action_recipeDetailFragment_to_recipeAddFragment"
             app:destination="@id/recipeAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fridgeItemDetailFragment"
+        android:name="com.example.clean.ui.fragment.FridgeItemDetailFragment"
+        android:label="fragment_fridge_item_detail"
+        tools:layout="@layout/fragment_fridge_item_detail" >
+        <argument
+            android:name="itemName"
+            app:argType="string" />
+        <argument
+            android:name="itemUnit"
+            app:argType="string" />
     </fragment>
 </navigation>

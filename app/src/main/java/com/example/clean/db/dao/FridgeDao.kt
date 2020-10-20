@@ -31,4 +31,11 @@ interface FridgeDao {
     @Transaction
     @Query("SELECT * FROM FridgeItemEntity WHERE name == :name AND amount > 0 AND unit == :unit")
     fun getInFridgeItemByNameAndUnit(name: String, unit: String): FridgeItemWithCat?
+
+    @Transaction
+    @Query("SELECT * FROM FridgeItemEntity WHERE name == :name AND unit == :unit")
+    fun getItemByNameAndUnit(name:String, unit: String): FridgeItemWithCat?
+
+    @Query("SELECT categoryName FROM FridgeItemCategoryEntity")
+    fun getAllItemsCategories(): List<String>
 }

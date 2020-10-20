@@ -34,5 +34,11 @@ class FridgeDataSource (context: Context): IItemRepository {
     override suspend fun getInFridgeItemByNameAndUnit(name: String, unit: String): FridgeItem? =
         fridgeDao.getInFridgeItemByNameAndUnit(name, unit)?.toFridgeItem()
 
+    override suspend fun getItemByNameAndUnit(name: String, unit: String): FridgeItem? =
+        fridgeDao.getItemByNameAndUnit(name,unit)?.toFridgeItem()
+
+    override suspend fun getAllItemsCategories(): List<String> =
+        fridgeDao.getAllItemsCategories()
+
 
 }

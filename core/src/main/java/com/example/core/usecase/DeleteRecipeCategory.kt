@@ -1,4 +1,8 @@
 package com.example.core.usecase
 
-class DeleteRecipeCategory {
+import com.example.core.repository.RecipeRepository
+
+class DeleteRecipeCategory(private val recipeRepository: RecipeRepository) {
+    suspend operator fun invoke(recipeName:String,category:String) =
+        recipeRepository.deleteRecipeCategory(recipeName, category)
 }
