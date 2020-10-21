@@ -21,6 +21,7 @@ class FridgeItemDetailViewModel @ViewModelInject constructor(
     val notSelectedCategoriesFiltered = MutableLiveData<List<String>>()
     private val allCategories = TreeMap<String, Boolean>()
     private var categoryFilter = ""
+    val isUpdateFinished = MutableLiveData<Boolean>()
 
     fun loadItem(name: String, unit: String){
         coroutineScope.launch {
@@ -29,7 +30,7 @@ class FridgeItemDetailViewModel @ViewModelInject constructor(
                 loadedItem.categories.map { category -> allCategories[category] = true }
                 selectedCategories.postValue(allCategories.filter { it.value }.map { it.key})
                 notSelectedCategoriesFiltered.postValue(allCategories.filter { !it.value && it.key.contains(categoryFilter) }.map { it.key })
-                Log.e("poo", loadedItem.categories.toString() + "xxx")
+                isUpdateFinished.postValue(false)
             }
         }
     }
@@ -42,6 +43,7 @@ class FridgeItemDetailViewModel @ViewModelInject constructor(
                 useCases.deleteItem(it)
             }
             useCases.addItem(newItem)
+            isUpdateFinished.postValue(true)
         }
     }
 

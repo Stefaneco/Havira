@@ -64,6 +64,11 @@ class FridgeItemDetailFragment : Fragment(), RecipeCategoryAction {
             et_fridgeDetail_name.setText(it.name)
             et_fridgeDetail_unit.setText(it.unit)
         })
+        viewModel.isUpdateFinished.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                findNavController().popBackStack()
+            }
+        })
     }
 
     override fun checkCategory(category: String) {
@@ -93,7 +98,7 @@ class FridgeItemDetailFragment : Fragment(), RecipeCategoryAction {
             viewModel.updateItem(et_fridgeDetail_name.text.toString(),
             et_fridgeDetail_amount.text.toString().toFloat(),
             et_fridgeDetail_unit.text.toString())
-            findNavController().popBackStack()
+            //findNavController().popBackStack()
         }
     }
 

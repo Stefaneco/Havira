@@ -84,6 +84,12 @@ class RecipeAddFragment : Fragment(), RecipeCategoryAction {
             et_servings.setText(it.servings.toString())
             et_time.setText(it.cookTime.toString())
         })
+        viewModel.isUpdateFinished.observe(viewLifecycleOwner, Observer {
+            if(it){
+                val action = RecipeAddFragmentDirections.actionRecipeAddFragmentToRecipeFragment()
+                findNavController().navigate(action)
+            }
+        })
     }
 
     private fun setupRecyclerViews(){
@@ -115,17 +121,13 @@ class RecipeAddFragment : Fragment(), RecipeCategoryAction {
         }
 
         b_submit.setOnClickListener {
-
             if (!viewModel.isNameFree){
                 Toast.makeText(requireContext(), "Name of recipe already in database!", Toast.LENGTH_LONG).show()
             }
-            else if(viewModel.addRecipe(et_name.text.toString(), et_instructions.text.toString(), et_time.text.toString().toInt(),
-                    et_servings.text.toString().toInt(),et_rating.text.toString().toInt())){
-                val action = RecipeAddFragmentDirections.actionRecipeAddFragmentToRecipeFragment()
-                findNavController().navigate(action)
+            else
+                viewModel.addRecipe(et_name.text.toString(), et_instructions.text.toString(), et_time.text.toString().toInt(),
+                    et_servings.text.toString().toInt(),et_rating.text.toString().toInt())
             }
-            }
-
         }
 
 

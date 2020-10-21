@@ -22,5 +22,8 @@ AppCompatDialog(context){
             ))
             dismiss()
         }
+        tv_cancel.setOnClickListener {
+            dismiss()
+        }
     }
 }

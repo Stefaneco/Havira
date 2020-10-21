@@ -1,5 +1,6 @@
 package com.example.clean.ui.viewmodel
 
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,6 +21,7 @@ class ShoppingViewModel @ViewModelInject constructor(
     fun addShoppingItem(item: ShoppingItem){
         coroutineScope.launch {
             useCases.addShoppingItem(item)
+            shoppingItems.postValue(useCases.getAllShoppingItemsSummedByName())
         }
     }
 
@@ -32,6 +34,7 @@ class ShoppingViewModel @ViewModelInject constructor(
     fun moveItemsToFridge(){
         coroutineScope.launch {
             shoppingItems.value?.filter { it.isChecked }?.let {
+                Log.e("ShoppingViewModel", it.size.toString())
                 for (checkedItem in it){
                     useCases.addItem(FridgeItem(checkedItem.name,checkedItem.amount,
                         checkedItem.unit,categories = listOf()))

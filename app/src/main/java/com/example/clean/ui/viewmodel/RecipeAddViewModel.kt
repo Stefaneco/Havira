@@ -25,8 +25,9 @@ class RecipeAddViewModel @ViewModelInject constructor(
     private var categoryFilter = ""
     val recipe = MutableLiveData<Recipe>()
     var isNameFree = true
+    val isUpdateFinished = MutableLiveData<Boolean>()
 
-    fun addRecipe(name: String, description: String, cookTime: Int, servings: Int, rating: Int): Boolean{
+    fun addRecipe(name: String, description: String, cookTime: Int, servings: Int, rating: Int){
         if (viewModelItems.any()) {
             val categories = allCategories.filter { it.value }.map { it.key }
             val newRecipe = Recipe(name, description, viewModelItems.map { RecipeItem(it.name,it.unit,name,it.amount) },
@@ -36,14 +37,14 @@ class RecipeAddViewModel @ViewModelInject constructor(
                     useCases.deleteRecipe(it)
                 }
                 useCases.addRecipe(newRecipe)
+                isUpdateFinished.postValue(true)
             }
-            return true
         }
-        return false
     }
 
     fun loadCategories(){
         coroutineScope.launch {
+            isUpdateFinished.postValue(false)
             useCases.getAllRecipeCategories().map { allCategories[it] = false }
             notSelectedCategoriesFiltered.postValue(allCategories.filter { !it.value && it.key.contains(categoryFilter) }.map { it.key })
         }
