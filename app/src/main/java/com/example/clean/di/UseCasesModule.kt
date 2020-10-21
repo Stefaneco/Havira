@@ -22,15 +22,17 @@ import dagger.hilt.android.components.ApplicationComponent
     fun getUseCases(recipeRepository: RecipeRepository, itemRepository: ItemRepository, shoppingRepository: ShoppingRepository) =
         UseCases(
             AddItem(itemRepository, recipeRepository),
+            AddItemCategory(itemRepository),
             AddRecipe(recipeRepository, itemRepository),
             AddRecipeCategory(recipeRepository),
-            DeleteItem(itemRepository),
+            DeleteItem(itemRepository, recipeRepository),
             DeleteRecipe(recipeRepository),
             DeleteRecipeCategory(recipeRepository),
             GetAllRecipeCategories(recipeRepository),
             GetAllItemsCategories(itemRepository),
             GetFridgeItemByNameAndUnit(itemRepository),
             GetInFridgeItems(itemRepository),
+            GetInFridgeItemsWithGivenCategories(itemRepository),
             GetRecipeByName(recipeRepository),
             GetRecipesWithGivenCategories(recipeRepository),
             IsRecipeNameInDatabase(recipeRepository),

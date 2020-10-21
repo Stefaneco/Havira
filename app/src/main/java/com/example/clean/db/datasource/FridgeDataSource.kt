@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.example.clean.db.AppDatabase
 import com.example.clean.db.entities.fridge.FridgeItemCatCrossRef
+import com.example.clean.db.entities.fridge.FridgeItemCategoryEntity
 import com.example.clean.db.entities.fridge.FridgeItemEntity
 import com.example.clean.db.entities.fridge.FridgeItemWithCat
 import com.example.clean.db.entities.recipe.RecipeItemEntity
@@ -19,6 +20,10 @@ class FridgeDataSource (context: Context): IItemRepository {
         FridgeItemCatCrossRef.fromFridgeItem(item).let { fridgeDao.addFridgeItemCatCrossRef(it) }
     }
 
+    override suspend fun addCategory(category: String) {
+        fridgeDao.addFridgeItemCategory(FridgeItemCategoryEntity(category))
+    }
+
     override suspend fun delete(item: FridgeItem) {
         fridgeDao.delete(FridgeItemEntity.fromFridgeItem(item))
         FridgeItemCatCrossRef.fromFridgeItem(item).let { fridgeDao.deleteFridgeItemCatCrossRef(it) }
@@ -27,8 +32,8 @@ class FridgeDataSource (context: Context): IItemRepository {
     override suspend fun getInFridge(): List<FridgeItem> =
         fridgeDao.getInFridge().map { it.toFridgeItem() }
 
-    override suspend fun getInFridgeItemByName(name: String): List<FridgeItem>? =
-        fridgeDao.getInFridgeItemByName(name)?.map { it.toFridgeItem() }
+    override suspend fun getInFridgeItemByName(name: String): List<FridgeItem> =
+        fridgeDao.getInFridgeItemByName(name).map { it.toFridgeItem() }
 
 
     override suspend fun getInFridgeItemByNameAndUnit(name: String, unit: String): FridgeItem? =

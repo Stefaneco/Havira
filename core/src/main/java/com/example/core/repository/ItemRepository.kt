@@ -5,6 +5,8 @@ import com.example.core.entites.FridgeItem
 class ItemRepository(private val iItemRepository: IItemRepository) {
     suspend fun add(item: FridgeItem) = iItemRepository.add(item)
 
+    suspend fun addCategory(category: String) = iItemRepository.addCategory(category)
+
     suspend fun delete(item: FridgeItem) = iItemRepository.delete(item)
 
     suspend fun getInFridge() = iItemRepository.getInFridge()
@@ -19,5 +21,6 @@ class ItemRepository(private val iItemRepository: IItemRepository) {
 
     suspend fun getAllItemsCategories() =
         iItemRepository.getAllItemsCategories()
+
 
 }
