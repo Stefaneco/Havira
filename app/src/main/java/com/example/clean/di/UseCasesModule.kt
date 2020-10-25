@@ -38,11 +38,12 @@ import dagger.hilt.android.components.ApplicationComponent
             IsRecipeNameInDatabase(recipeRepository),
             MakeRecipe(recipeRepository, itemRepository),
 
+            AddMissingItemsForRecipe(shoppingRepository),
             AddShoppingItem(shoppingRepository),
-            ChangeShoppingItemCheckedState(shoppingRepository),
-            DeleteCheckedShoppingItems(shoppingRepository),
-            GetAllShoppingItemsSummedByName(shoppingRepository),
-            GetShoppingItemByName(shoppingRepository)
+            ChangeItemsCheckState(shoppingRepository),
+            GetShoppingItemsMerged(shoppingRepository),
+            MoveCheckedShoppingItemsToFridge(shoppingRepository,itemRepository,recipeRepository)
+
         )
 
     @Provides

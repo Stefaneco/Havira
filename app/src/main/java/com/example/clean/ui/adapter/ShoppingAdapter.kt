@@ -26,7 +26,7 @@ class ShoppingAdapter(private var items: List<ShoppingItem>, private val action:
             itemView.tv_unitShoppingCard.text = shoppingItem.unit
             itemView.cb_nameShoppingCard.isChecked = true
             itemView.cb_nameShoppingCard.setOnCheckedChangeListener{ _, _ ->
-                action.onItemClicked(shoppingItem.name)
+                action.onItemClicked(shoppingItem.name,shoppingItem.unit,shoppingItem.isChecked)
             }
         }
     }
@@ -38,7 +38,7 @@ class ShoppingAdapter(private var items: List<ShoppingItem>, private val action:
             itemView.tv_unitShoppingCard.text = shoppingItem.unit
             itemView.cb_nameShoppingCard.isChecked = false
             itemView.cb_nameShoppingCard.setOnCheckedChangeListener{ _, _ ->
-                action.onItemClicked(shoppingItem.name)
+                action.onItemClicked(shoppingItem.name,shoppingItem.unit,shoppingItem.isChecked)
             }
         }
     }

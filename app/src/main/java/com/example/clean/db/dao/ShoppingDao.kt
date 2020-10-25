@@ -10,20 +10,23 @@ interface ShoppingDao {
     suspend fun addShoppingItem(item: ShoppingItemEntity)
 
     @Update
-    suspend fun updateShoppingItem(item: ShoppingItemEntity)
+    suspend fun updateShoppingItem(item:ShoppingItemEntity)
 
     @Delete
-    suspend fun deleteShoppingItems(items: List<ShoppingItemEntity>)
+    suspend fun deleteShoppingItem(item: ShoppingItemEntity)
 
-    @Query("SELECT * FROM ShoppingItemEntity")
-    fun getAllShoppingItems(): List<ShoppingItemEntity>
+    @Query("SELECT * FROM ShoppingItemEntity WHERE name == :name AND recipeName == :recipeName AND unit == :unit AND isChecked == :isChecked")
+    suspend fun getShoppingItem(name: String, recipeName: String, unit: String, isChecked: Boolean): ShoppingItemEntity?
+
+    @Query("SELECT * FROM ShoppingItemEntity WHERE name == :name AND unit == :unit AND isChecked == :isChecked")
+    suspend fun getShoppingItemsByNameUnitCheck(name: String,unit: String,isChecked: Boolean): List<ShoppingItemEntity>
 
     @Query("SELECT * FROM ShoppingItemEntity WHERE isChecked")
-    fun getAllCheckedShoppingItems(): List<ShoppingItemEntity>
+    suspend fun  getCheckedShoppingItems(): List<ShoppingItemEntity>
 
-    @Query("SELECT * FROM ShoppingItemEntity WHERE name==:name AND unit==:unit AND recipeName==:recipeName")
-    fun getShoppingItemByNameUnitAndRecipeName(name:String, unit: String, recipeName: String?): ShoppingItemEntity?
+    @Query("SELECT * FROM ShoppingItemEntity")
+    suspend fun getAllShoppingItems(): List<ShoppingItemEntity>
 
-    @Query("SELECT * FROM ShoppingItemEntity WHERE name==:name")
-    fun getShoppingItemByName(name:String): List<ShoppingItemEntity>
+    @Query("SELECT * FROM ShoppingItemEntity WHERE recipeName == :recipeName")
+    suspend fun getShoppingItemsByRecipe(recipeName: String): List<ShoppingItemEntity>
 }

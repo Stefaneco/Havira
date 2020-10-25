@@ -4,10 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.core.entites.ShoppingItem
 
-@Entity(primaryKeys = ["name"])
+@Entity(primaryKeys = ["name", "recipeName", "isChecked", "unit"])
 data class ShoppingItemEntity (
     val name: String,
-    val recipeName: String? = null,
+    val recipeName: String,
     val amount: Float,
     val unit: String,
     val isChecked: Boolean = false

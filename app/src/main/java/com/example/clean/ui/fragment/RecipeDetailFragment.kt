@@ -61,6 +61,9 @@ class RecipeDetailFragment : Fragment() {
             viewModel.deleteRecipe()
             findNavController().popBackStack()
         }
+        b_recipeDetail_toCart.setOnClickListener {
+            viewModel.addMissingItemsToShoppingList()
+        }
 
         observeViewModel()
     }

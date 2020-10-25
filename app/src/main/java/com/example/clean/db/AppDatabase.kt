@@ -18,7 +18,7 @@ import com.example.clean.db.entities.recipe.RecipeItemEntity
 
 @Database(entities = [FridgeItemEntity::class, FridgeItemCatCrossRef::class, FridgeItemCategoryEntity::class,
     RecipeEntity::class, RecipeItemEntity::class, RecipeCatCrossRef::class, RecipeCategoriesEntity::class,
-    ShoppingItemEntity::class], version = 8)
+    ShoppingItemEntity::class], version = 9)
 abstract class AppDatabase: RoomDatabase() {
     companion object {
         private const val DATABASE_NAME = "appdb.db"

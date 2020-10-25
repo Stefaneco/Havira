@@ -22,9 +22,10 @@ data class UseCases @Inject constructor(
     val isRecipeNameInDatabase: IsRecipeNameInDatabase,
     val makeRecipe: MakeRecipe,
 
+    val addMissingItemsForRecipe: AddMissingItemsForRecipe,
     val addShoppingItem: AddShoppingItem,
-    val changeShoppingItemCheckedState: ChangeShoppingItemCheckedState,
-    val deleteCheckedShoppingItems: DeleteCheckedShoppingItems,
-    val getAllShoppingItemsSummedByName: GetAllShoppingItemsSummedByName,
-    val getShoppingItemByName: GetShoppingItemByName
+    val changeItemsCheckState: ChangeItemsCheckState,
+    val getShoppingItemsMerged: GetShoppingItemsMerged,
+    val moveCheckedShoppingItemsToFridge: MoveCheckedShoppingItemsToFridge
+
 )

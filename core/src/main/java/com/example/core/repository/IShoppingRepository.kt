@@ -7,13 +7,16 @@ interface IShoppingRepository {
 
     suspend fun updateShoppingItem(item: ShoppingItem)
 
-    suspend fun deleteShoppingItems(items: List<ShoppingItem>)
+    suspend fun deleteShoppingItem(item: ShoppingItem)
+
+    suspend fun getShoppingItem(name: String, recipeName: String, unit: String, isChecked: Boolean): ShoppingItem?
+
+    suspend fun getShoppingItemsByNameUnitCheck(name: String, unit: String, isChecked: Boolean): List<ShoppingItem>
+
+    suspend fun getCheckedShoppingItems(): List<ShoppingItem>
 
     suspend fun getAllShoppingItems(): List<ShoppingItem>
 
-    suspend fun getAllCheckedItems(): List<ShoppingItem>
+    suspend fun getShoppingItemsByRecipe(recipeName: String): List<ShoppingItem>
 
-    suspend fun getShoppingItemByNameUnitAndRecipeName(name: String, unit: String, recipeName: String?): ShoppingItem?
-
-    suspend fun getShoppingItemByName(name: String): List<ShoppingItem>
 }

@@ -17,21 +17,22 @@ class ShoppingDataSource(context: Context): IShoppingRepository {
         shoppingDao.updateShoppingItem(ShoppingItemEntity.fromShoppingItem(item))
     }
 
-    override suspend fun deleteShoppingItems(items: List<ShoppingItem>) {
-        shoppingDao.deleteShoppingItems(items.map { ShoppingItemEntity.fromShoppingItem(it) }) }
+    override suspend fun deleteShoppingItem(item: ShoppingItem) =
+        shoppingDao.deleteShoppingItem(ShoppingItemEntity.fromShoppingItem(item))
+
+    override suspend fun getShoppingItem(name: String, recipeName: String, unit: String, isChecked: Boolean): ShoppingItem? =
+        shoppingDao.getShoppingItem(name, recipeName, unit, isChecked)?.toShoppingItem()
+
+    override suspend fun getShoppingItemsByNameUnitCheck(name: String, unit: String, isChecked: Boolean): List<ShoppingItem> =
+        shoppingDao.getShoppingItemsByNameUnitCheck(name, unit, isChecked).map { it.toShoppingItem() }
+
+    override suspend fun getCheckedShoppingItems(): List<ShoppingItem> =
+        shoppingDao.getCheckedShoppingItems().map { it.toShoppingItem() }
 
     override suspend fun getAllShoppingItems(): List<ShoppingItem> =
         shoppingDao.getAllShoppingItems().map { it.toShoppingItem() }
 
-    override suspend fun getAllCheckedItems(): List<ShoppingItem> =
-        shoppingDao.getAllCheckedShoppingItems().map { it.toShoppingItem() }
+    override suspend fun getShoppingItemsByRecipe(recipeName: String): List<ShoppingItem> =
+        shoppingDao.getShoppingItemsByRecipe(recipeName).map { it.toShoppingItem() }
 
-    override suspend fun getShoppingItemByNameUnitAndRecipeName(
-        name: String, unit: String, recipeName: String?): ShoppingItem? =
-        shoppingDao.getShoppingItemByNameUnitAndRecipeName(name,unit,recipeName)?.toShoppingItem()
-
-
-
-    override suspend fun getShoppingItemByName(name: String): List<ShoppingItem> =
-        shoppingDao.getShoppingItemByName(name)?.map { it.toShoppingItem()}
 }

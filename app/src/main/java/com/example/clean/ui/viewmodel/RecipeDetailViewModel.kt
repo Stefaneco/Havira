@@ -33,6 +33,14 @@ class RecipeDetailViewModel @ViewModelInject constructor(
         }
     }
 
+    fun addMissingItemsToShoppingList(){
+        CoroutineScope(Dispatchers.IO).launch {
+            recipe.value?.let {
+                useCases.addMissingItemsForRecipe(it)
+            }
+        }
+    }
+
     fun deleteRecipe(){
         CoroutineScope(Dispatchers.IO).launch {
             recipe.value?.let {

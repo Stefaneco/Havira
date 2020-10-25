@@ -17,6 +17,7 @@ AppCompatDialog(context){
         tv_add.setOnClickListener {
             dialogListener.addShoppingItem(ShoppingItem(
                 name = et_name.text.toString(),
+                recipeName = "",
                 amount = et_amount.text.toString().toFloat(),
                 unit = et_unit.text.toString()
             ))

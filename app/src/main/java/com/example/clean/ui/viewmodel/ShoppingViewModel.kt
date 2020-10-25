@@ -21,13 +21,13 @@ class ShoppingViewModel @ViewModelInject constructor(
     fun addShoppingItem(item: ShoppingItem){
         coroutineScope.launch {
             useCases.addShoppingItem(item)
-            shoppingItems.postValue(useCases.getAllShoppingItemsSummedByName())
+            shoppingItems.postValue(useCases.getShoppingItemsMerged())
         }
     }
 
     fun loadItems(){
         coroutineScope.launch {
-            shoppingItems.postValue(useCases.getAllShoppingItemsSummedByName())
+            shoppingItems.postValue(useCases.getShoppingItemsMerged())
         }
     }
 
@@ -40,14 +40,14 @@ class ShoppingViewModel @ViewModelInject constructor(
                         checkedItem.unit,categories = listOf()))
                 }
             }
-            useCases.deleteCheckedShoppingItems()
-            shoppingItems.postValue(useCases.getAllShoppingItemsSummedByName())
+            useCases.moveCheckedShoppingItemsToFridge()
+            shoppingItems.postValue(useCases.getShoppingItemsMerged())
         }
     }
 
-    fun changeCheckStateOfItem(itemName: String){
+    fun changeCheckStateOfItem(itemName: String, unit: String, isChecked: Boolean){
         coroutineScope.launch {
-            useCases.changeShoppingItemCheckedState(itemName)
+            useCases.changeItemsCheckState(itemName,unit,isChecked)
         }
     }
 }

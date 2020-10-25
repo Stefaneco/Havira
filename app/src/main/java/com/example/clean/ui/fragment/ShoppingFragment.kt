@@ -72,8 +72,8 @@ class ShoppingFragment : Fragment(), ShoppingCheckAction {
         }
     }
 
-    override fun onItemClicked(itemName: String) {
-        viewModel.changeCheckStateOfItem(itemName)
+    override fun onItemClicked(itemName: String, unit: String, isChecked: Boolean) {
+        viewModel.changeCheckStateOfItem(itemName,unit,isChecked)
     }
 
 
