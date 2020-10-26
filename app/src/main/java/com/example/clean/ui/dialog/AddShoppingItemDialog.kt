@@ -15,13 +15,15 @@ AppCompatDialog(context){
         setContentView(R.layout.dialog_add_in_fridge_item)
 
         tv_add.setOnClickListener {
-            dialogListener.addShoppingItem(ShoppingItem(
-                name = et_name.text.toString(),
-                recipeName = "",
-                amount = et_amount.text.toString().toFloat(),
-                unit = et_unit.text.toString()
-            ))
-            dismiss()
+            if(et_amount.text.any() && et_name.text.any()){
+                dialogListener.addShoppingItem(ShoppingItem(
+                    name = et_name.text.toString(),
+                    recipeName = "",
+                    amount = et_amount.text.toString().toFloat(),
+                    unit = et_unit.text.toString()
+                ))
+                dismiss()
+            }
         }
         tv_cancel.setOnClickListener {
             dismiss()

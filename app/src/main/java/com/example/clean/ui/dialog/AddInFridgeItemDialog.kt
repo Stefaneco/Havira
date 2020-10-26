@@ -16,9 +16,11 @@ class AddInFridgeItemDialog(context: Context, private val dialogListener: AddInF
         setContentView(R.layout.dialog_add_in_fridge_item)
 
         tv_add.setOnClickListener {
-            dialogListener.onAddButtonClicked(FridgeItem(et_name.text.toString(),
-                et_amount.text.toString().toFloat(), et_unit.text.toString(),categories = listOf()))
-            dismiss()
+            if(et_name.text.any() && et_amount.text.any()) {
+                dialogListener.onAddButtonClicked(FridgeItem(et_name.text.toString(),
+                    et_amount.text.toString().toFloat(), et_unit.text.toString(),categories = listOf()))
+                dismiss()
+            }
         }
 
         tv_cancel.setOnClickListener {

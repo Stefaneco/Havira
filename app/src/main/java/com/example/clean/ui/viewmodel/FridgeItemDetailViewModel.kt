@@ -55,17 +55,21 @@ class FridgeItemDetailViewModel @ViewModelInject constructor(
     }
 
     fun checkCategory(name: String) {
-        if (!allCategories.containsKey(name) && name.any())
-            coroutineScope.launch {
-                useCases.addItemCategory(name)
-            }
-        allCategories[name] = true
-        feedLiveData()
+        if(name.any()){
+            if (!allCategories.containsKey(name) && name.any())
+                coroutineScope.launch {
+                    useCases.addItemCategory(name)
+                }
+            allCategories[name] = true
+            feedLiveData()
+        }
     }
 
     fun uncheckCategory(name: String){
-        allCategories[name] = false
-        feedLiveData()
+        if (name.any()){
+            allCategories[name] = false
+            feedLiveData()
+        }
     }
 
     private fun feedLiveData(){

@@ -16,12 +16,14 @@ class AddRecipeItemDialog(context: Context, private val dialogListener: AddRecip
         setContentView(R.layout.dialog_add_in_fridge_item)
 
         tv_add.setOnClickListener {
-            dialogListener.onAddButtonClicked(
-                name = et_name.text.toString(),
-                amount = et_amount.text.toString().toFloat(),
-                unit = et_unit.text.toString()
-            )
-            dismiss()
+            if(et_name.text.any() && et_amount.text.any()){
+                dialogListener.onAddButtonClicked(
+                    name = et_name.text.toString(),
+                    amount = et_amount.text.toString().toFloat(),
+                    unit = et_unit.text.toString()
+                )
+                dismiss()
+            }
         }
 
         tv_cancel.setOnClickListener {
