@@ -22,11 +22,15 @@ class FridgeItemAdapter(private var items: List<FridgeItem>, private val action:
         private val name = view.tv_name
         private val amount = view.tv_amount
         private val unit = view.tv_unit
-        private val layout = view.fridgeItemLayout
+        private val layout = view
+        //private val layout = view.fridgeItemLayout
 
         fun bind(item: FridgeItem){
             name.text = item.name
-            amount.text = item.amount.toString()
+            if(item.amount % 1.0 == 0.0)
+                amount.text = item.amount.toInt().toString()
+            else
+                amount.text = item.amount.toString()
             unit.text = item.unit
             layout.setOnLongClickListener {
                 action.onItemLongClick(item.name,item.unit)

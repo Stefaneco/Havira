@@ -1,43 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:paddingRight="8dp"
+    android:paddingLeft="8dp"
+    android:background="@color/colorPrimary">
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center_vertical"
         android:text="TextView"
+        android:textColor="@color/colorFont"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/recipe_card_vertical_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".50"/>
+        app:layout_constraintWidth_percent="0.71" />
 
-    <TextView
-        android:id="@+id/tv_rating"
+    <LinearLayout
+        android:id="@+id/recipe_card_vertical_layout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/tv_name"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".15"/>
+        app:layout_constraintWidth_percent="0.27">
 
-    <TextView
-        android:id="@+id/tv_servings"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/tv_rating"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".20"/>
+        <TextView
+            android:id="@+id/tv_rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Text"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:textColor="@color/colorFont"
+            android:background="@color/white"
+            android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/tv_servings"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent=".15"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_servings"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="3dp"
+                android:text="Text"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:textColor="@color/colorFont"
+                android:background="@color/white"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="3dp"
+                android:text="Text"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:textColor="@color/colorFont"
+                android:background="@color/white"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

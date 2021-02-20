@@ -3,12 +3,15 @@
 
     <item
         android:id="@+id/shoppingFragment"
-        android:title="Shopping" />
+        android:title="Shopping"
+        android:icon="@drawable/ic_shopping_list" />
     <item
         android:id="@+id/fridgeFragment"
-        android:title="Items" />
+        android:title="Items"
+        android:icon="@drawable/ic_items"/>
     <item
         android:id="@+id/recipeFragment"
-        android:title="Recipes" />
+        android:title="Recipes"
+        android:icon="@drawable/ic_recipes"/>
 
 </menu>

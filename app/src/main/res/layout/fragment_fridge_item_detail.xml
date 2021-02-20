@@ -14,13 +14,15 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toStartOf="@+id/b_fridgeDetail_subbmit"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/colorFont"
+        android:maxLength="@integer/productMaxLength"/>
 
     <Button
         android:id="@+id/b_fridgeDetail_subbmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SUBBMIT"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_ok"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,7 +37,9 @@
         android:text="Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_fridgeDetail_name"
-        app:layout_constraintWidth_percent=".45" />
+        app:layout_constraintWidth_percent=".45"
+        android:textColor="@color/colorFont"
+        android:maxLength="@integer/amountMaxLength"/>
 
     <EditText
         android:id="@+id/et_fridgeDetail_unit"
@@ -48,7 +52,9 @@
         android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_fridgeDetail_name"
-        app:layout_constraintWidth_percent=".45" />
+        app:layout_constraintWidth_percent=".45"
+        android:textColor="@color/colorFont"
+        android:maxLength="@integer/unitMaxLength"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_fridgeDetail_selectedCategories"
@@ -68,14 +74,16 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_fridgeDetail_selectedCategories" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_fridgeDetail_selectedCategories"
+        android:textColor="@color/colorFont"
+        android:maxLength="@integer/categoryMaxLength"/>
 
     <Button
         android:id="@+id/b_fridgeDetail_addCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="8dp"
-        android:text="Add"
+        android:background="@drawable/ic_ok"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/et_fridgeDetail_searchCategory"
         app:layout_constraintTop_toBottomOf="@+id/rv_fridgeDetail_selectedCategories" />

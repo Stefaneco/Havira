@@ -22,7 +22,8 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="name"
-            android:inputType="text" />
+            android:inputType="text"
+            android:maxLength="@integer/productMaxLength"/>
 
         <EditText
             android:id="@+id/et_amount"
@@ -31,7 +32,8 @@
             android:layout_weight="6"
             android:ems="10"
             android:hint="amount"
-            android:inputType="number|numberDecimal" />
+            android:inputType="number|numberDecimal"
+            android:maxLength="@integer/amountMaxLength"/>
 
         <EditText
             android:id="@+id/et_unit"
@@ -40,7 +42,8 @@
             android:layout_weight="6"
             android:ems="10"
             android:hint="unit"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:maxLength="@integer/unitMaxLength"/>
     </LinearLayout>
 
     <TextView

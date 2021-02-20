@@ -15,10 +15,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.clean.R
-import com.example.clean.ui.adapter.RecipeCategoryAction
-import com.example.clean.ui.adapter.RecipeCategoryAdapter
-import com.example.clean.ui.adapter.RecipeItemAdapter
-import com.example.clean.ui.adapter.RecipeSelectedCategoryAdapter
+import com.example.clean.ui.adapter.*
+import com.example.clean.ui.adapter.decoration.MarginItemDecoration
 import com.example.clean.ui.dialog.AddRecipeItemDialog
 import com.example.clean.ui.dialog.AddRecipeItemListener
 import com.example.clean.ui.viewmodel.RecipeAddViewModel
@@ -100,10 +98,12 @@ class RecipeAddFragment : Fragment(), RecipeCategoryAction {
         rv_categoriesRecipeAd.apply {
             adapter = categoriesAdapter
             layoutManager = StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL)
+            addItemDecoration(MarginItemDecoration(15))
         }
         rv_selectedCategoriesRecipeAd.apply {
             adapter = selectedCategoriesAdapter
             layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+            addItemDecoration(MarginItemDecoration(15))
         }
     }
 

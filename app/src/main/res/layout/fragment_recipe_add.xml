@@ -21,20 +21,24 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_items"
-                android:layout_width="409dp"
-                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/border_primary"
+                android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/et_rating" />
 
             <Button
                 android:id="@+id/b_submit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="Submit"
+                android:background="@drawable/ic_ok"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,7 +52,10 @@
                 android:hint="name"
                 android:inputType="textPersonName"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/colorFont"
+                android:maxLength="@integer/recipeNameMaxLength"
+                android:textSize="25sp"/>
 
             <EditText
                 android:id="@+id/et_servings"
@@ -60,7 +67,10 @@
                 android:inputType="textPersonName"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/et_name"
-                app:layout_constraintWidth_percent=".30" />
+                app:layout_constraintWidth_percent=".30"
+                android:textColor="@color/colorFont"
+                android:backgroundTint="@color/colorAccent"
+                android:maxLength="@integer/servingsMaxLength"/>
 
             <EditText
                 android:id="@+id/et_time"
@@ -73,7 +83,10 @@
                 app:layout_constraintEnd_toStartOf="@+id/et_rating"
                 app:layout_constraintStart_toEndOf="@+id/et_servings"
                 app:layout_constraintTop_toBottomOf="@+id/et_name"
-                app:layout_constraintWidth_percent=".30" />
+                app:layout_constraintWidth_percent=".30"
+                android:textColor="@color/colorFont"
+                android:backgroundTint="@color/colorAccent"
+                android:maxLength="@integer/cookTimeMaxLength"/>
 
             <EditText
                 android:id="@+id/et_rating"
@@ -85,7 +98,9 @@
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/et_name"
-                app:layout_constraintWidth_percent=".30" />
+                app:layout_constraintWidth_percent=".30"
+                android:textColor="@color/colorFont"
+                android:backgroundTint="@color/colorAccent"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_categoriesRecipeAd"
@@ -94,14 +109,16 @@
                 android:layout_marginTop="3dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_searchCategory" />
+                app:layout_constraintTop_toBottomOf="@+id/et_searchCategory"
+                android:background="@color/colorPrimary"/>
 
             <Button
                 android:id="@+id/b_addItem"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ic_plus"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rv_items" />
 
@@ -118,7 +135,10 @@
                 android:inputType="textMultiLine"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/b_addItem" />
+                app:layout_constraintTop_toBottomOf="@+id/b_addItem"
+                android:textColor="@color/colorFont"
+                android:background="@drawable/border_primary"
+                android:padding="8dp"/>
 
             <EditText
                 android:id="@+id/et_searchCategory"
@@ -131,12 +151,16 @@
                 android:inputType="textPersonName"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rv_selectedCategoriesRecipeAd"
-                app:layout_constraintWidth_percent="0.70" />
+                app:layout_constraintWidth_percent="0.70"
+                android:textColor="@color/colorFont"
+                android:maxLength="@integer/categoryMaxLength"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_selectedCategoriesRecipeAd"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -144,11 +168,11 @@
 
             <Button
                 android:id="@+id/b_addCategory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="Button"
+                android:background="@drawable/ic_ok"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/et_searchCategory"
                 app:layout_constraintTop_toBottomOf="@+id/rv_selectedCategoriesRecipeAd" />

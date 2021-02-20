@@ -23,14 +23,17 @@ class RecipeItemAdapter(private var items: List<RecipeItem>): RecyclerView.Adapt
 
         fun bind(item: RecipeItem){
             name.text = item.name
-            amount.text = item.amount.toString()
+            if (item.amount % 1.0 == 0.0)
+                amount.text = item.amount.toInt().toString()
+            else
+                amount.text = item.amount.toString()
             unit.text = item.unit
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = RecipeItemViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.card_recipe_item,parent,false)
+        LayoutInflater.from(parent.context).inflate(R.layout.card_fridge_item,parent,false)
     )
 
     override fun getItemCount() = items.size

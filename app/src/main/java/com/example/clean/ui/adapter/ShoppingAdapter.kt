@@ -22,7 +22,10 @@ class ShoppingAdapter(private var items: List<ShoppingItem>, private val action:
     inner class CheckedViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun setCheckedDetails(shoppingItem: ShoppingItem){
             itemView.cb_nameShoppingCard.text = shoppingItem.name
-            itemView.tv_amountShoppingCard.text = shoppingItem.amount.toString()
+            if(shoppingItem.amount % 1.0 == 0.0)
+                itemView.tv_amountShoppingCard.text = shoppingItem.amount.toInt().toString()
+            else
+                itemView.tv_amountShoppingCard.text = shoppingItem.amount.toString()
             itemView.tv_unitShoppingCard.text = shoppingItem.unit
             itemView.cb_nameShoppingCard.isChecked = true
             itemView.cb_nameShoppingCard.setOnCheckedChangeListener{ _, _ ->
@@ -34,7 +37,10 @@ class ShoppingAdapter(private var items: List<ShoppingItem>, private val action:
     inner class UncheckedViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         fun setUncheckedDetails(shoppingItem: ShoppingItem){
             itemView.cb_nameShoppingCard.text = shoppingItem.name
-            itemView.tv_amountShoppingCard.text = shoppingItem.amount.toString()
+            if(shoppingItem.amount % 1.0 == 0.0)
+                itemView.tv_amountShoppingCard.text = shoppingItem.amount.toInt().toString()
+            else
+                itemView.tv_amountShoppingCard.text = shoppingItem.amount.toString()
             itemView.tv_unitShoppingCard.text = shoppingItem.unit
             itemView.cb_nameShoppingCard.isChecked = false
             itemView.cb_nameShoppingCard.setOnCheckedChangeListener{ _, _ ->

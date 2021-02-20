@@ -23,10 +23,11 @@ class RecipeAdapter(private var recipes: List<Recipe>, private val action: ItemD
 
     inner class GreenViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
          fun setGreenDetails(recipe: Recipe){
-            itemView.tv_recipeNameGreen.text = recipe.name
-            itemView.tv_recipeRatingGreen.text = recipe.rating.toString()
-            itemView.tv_recipeServingsGreen.text = recipe.servings.toString()
-            itemView.tv_recipeCookTimeGreen.text = recipe.cookTime.toString()
+             itemView.setBackgroundColor(itemView.context.resources.getColor(R.color.colorOk))
+             itemView.tv_name.text = recipe.name
+             itemView.tv_rating.text = recipe.rating.toString()
+             itemView.tv_servings.text = recipe.servings.toString()
+             itemView.tv_time.text = recipe.cookTime.toString()
              itemView.setOnClickListener {
                  action.onItemClick(recipe.name)
              }
@@ -48,7 +49,7 @@ class RecipeAdapter(private var recipes: List<Recipe>, private val action: ItemD
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view: View
         return if(viewType == GREEN){
-            view = LayoutInflater.from(parent.context).inflate(R.layout.card_recipe_green,
+            view = LayoutInflater.from(parent.context).inflate(R.layout.card_recipe,
                 parent, false)
             GreenViewHolder(view)
         } else {

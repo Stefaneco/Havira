@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.clean.R
 import com.example.clean.ui.adapter.*
+import com.example.clean.ui.adapter.decoration.MarginItemDecorationHeight
 import com.example.clean.ui.dialog.RecipeSortByDialog
 import com.example.clean.ui.dialog.RecipeSortByListener
 import com.example.clean.ui.viewmodel.RecipeViewModel
@@ -81,6 +82,7 @@ class RecipeFragment : Fragment(), ItemDetailAction, RecipeCategoryAction {
         rv_recipes.layoutManager = LinearLayoutManager(context)
         rv_recipes.adapter = recipeAdapter
         rv_recipes.setHasFixedSize(true)
+        rv_recipes.addItemDecoration(MarginItemDecorationHeight(5))
 
         rv_categoriesRecipe.apply {
             adapter = categoriesAdapter

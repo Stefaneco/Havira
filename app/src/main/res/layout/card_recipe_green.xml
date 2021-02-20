@@ -5,38 +5,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:background="@drawable/border_ok"
     >
 
     <TextView
-        android:textColor="@color/cardview_dark_background"
-        android:id="@+id/tv_recipeNameGreen"
-        android:layout_width="wrap_content"
+        android:id="@+id/card_recipe_green_tv_name"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textColor="@color/colorFont"
+        android:textSize="20sp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/card_recipe_green_vertical_layout"
+        app:layout_constraintEnd_toStartOf="@+id/card_recipe_green_vertical_layout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_recipeCookTimeGreen"
+    <View
+        android:layout_width="8dp"
+        android:layout_height="0dp"
+        android:background="@color/colorOk"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/card_recipe_green_vertical_layout"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/card_recipe_green_vertical_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tv_recipeServingsGreen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/tv_recipeCookTimeGreen"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/card_recipe_green_tv_rating"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:textColor="@color/colorFont"/>
 
-    <TextView
-        android:id="@+id/tv_recipeRatingGreen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/tv_recipeServingsGreen"
-        app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/colorOk"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/card_recipe_green_tv_servings"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:textColor="@color/colorFont"/>
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorOk"/>
+
+            <TextView
+                android:id="@+id/card_recipe_green_tv_time"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:textColor="@color/colorFont"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
