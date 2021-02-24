@@ -84,9 +84,9 @@ class RecipeDetailFragment : Fragment() {
     private fun observeViewModel(){
         viewModel.recipe.observe(viewLifecycleOwner, Observer {
             tv_name.text = it.name
-            tv_rating.text = it.rating.toString() + "/10"
-            tv_time.text = it.cookTime.toString() + " min"
-            tv_servings.text = it.servings.toString() + " serv"
+            tv_rating.text = it.rating.toString()
+            tv_time.text = it.cookTime.toString()
+            tv_servings.text = it.servings.toString()
             tv_instructions.text = it.description
             itemsAdapter.updateItems(it.items)
             it.categories.let { it1 -> categoriesAdapter.updateCategories(it1) }

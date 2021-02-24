@@ -8,7 +8,7 @@
 
 
     <ScrollView
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,23 +19,109 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_items"
-                android:layout_width="0dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/recipe_add_layout_values_bar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/border_primary"
-                android:padding="8dp"
+                android:background="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_rating" />
+                app:layout_constraintTop_toBottomOf="@id/et_name">
+
+                <EditText
+                    android:id="@+id/et_servings"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorAccent"
+                    android:ems="10"
+                    android:hint="servings"
+                    android:inputType="textPersonName"
+                    android:maxLength="@integer/servingsMaxLength"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent=".30"
+                    android:textColorHint="@color/white"
+                    android:gravity="center"/>
+
+                <EditText
+                    android:id="@+id/et_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorAccent"
+                    android:ems="10"
+                    android:hint="cook time"
+                    android:inputType="textPersonName"
+                    android:maxLength="@integer/cookTimeMaxLength"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/et_rating"
+                    app:layout_constraintStart_toEndOf="@+id/et_servings"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent=".30"
+                    android:gravity="center"
+                    android:textColorHint="@color/white" />
+
+                <EditText
+                    android:id="@+id/et_rating"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorAccent"
+                    android:ems="10"
+                    android:hint="1-10 rating"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent=".30"
+                    android:gravity="center"
+                    android:textColorHint="@color/white"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/recipe_add_layout_items"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recipe_add_layout_values_bar"
+                android:background="@drawable/border_primary">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_items"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@color/colorPrimary"/>
+
+                <Button
+                    android:id="@+id/b_addItem"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/ic_plus"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_items" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
             <Button
                 android:id="@+id/b_submit"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/ic_ok"
@@ -57,51 +143,6 @@
                 android:maxLength="@integer/recipeNameMaxLength"
                 android:textSize="25sp"/>
 
-            <EditText
-                android:id="@+id/et_servings"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:hint="servings"
-                android:inputType="textPersonName"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_name"
-                app:layout_constraintWidth_percent=".30"
-                android:textColor="@color/colorFont"
-                android:backgroundTint="@color/colorAccent"
-                android:maxLength="@integer/servingsMaxLength"/>
-
-            <EditText
-                android:id="@+id/et_time"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:hint="cook time"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toStartOf="@+id/et_rating"
-                app:layout_constraintStart_toEndOf="@+id/et_servings"
-                app:layout_constraintTop_toBottomOf="@+id/et_name"
-                app:layout_constraintWidth_percent=".30"
-                android:textColor="@color/colorFont"
-                android:backgroundTint="@color/colorAccent"
-                android:maxLength="@integer/cookTimeMaxLength"/>
-
-            <EditText
-                android:id="@+id/et_rating"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:ems="10"
-                android:hint="1-10 rating"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_name"
-                app:layout_constraintWidth_percent=".30"
-                android:textColor="@color/colorFont"
-                android:backgroundTint="@color/colorAccent"/>
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_categoriesRecipeAd"
                 android:layout_width="409dp"
@@ -112,15 +153,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/et_searchCategory"
                 android:background="@color/colorPrimary"/>
 
-            <Button
-                android:id="@+id/b_addItem"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/ic_plus"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rv_items" />
+
 
             <EditText
                 android:id="@+id/et_instructions"
@@ -135,7 +168,7 @@
                 android:inputType="textMultiLine"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/b_addItem"
+                app:layout_constraintTop_toBottomOf="@+id/recipe_add_layout_items"
                 android:textColor="@color/colorFont"
                 android:background="@drawable/border_primary"
                 android:padding="8dp"/>
@@ -168,8 +201,8 @@
 
             <Button
                 android:id="@+id/b_addCategory"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/ic_ok"

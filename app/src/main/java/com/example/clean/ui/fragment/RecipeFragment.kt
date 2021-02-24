@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -15,8 +16,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.clean.R
 import com.example.clean.ui.adapter.*
 import com.example.clean.ui.adapter.decoration.MarginItemDecorationHeight
-import com.example.clean.ui.dialog.RecipeSortByDialog
-import com.example.clean.ui.dialog.RecipeSortByListener
 import com.example.clean.ui.viewmodel.RecipeViewModel
 import com.example.core.entites.RecipeSortBy
 import dagger.hilt.android.AndroidEntryPoint
@@ -113,11 +112,30 @@ class RecipeFragment : Fragment(), ItemDetailAction, RecipeCategoryAction {
             }
         }
         b_sortByRecipe.setOnClickListener {
-            RecipeSortByDialog(requireContext(), object : RecipeSortByListener{
-                override fun sortByOptionClicked(option: RecipeSortBy) {
-                    viewModel.sortRecipes(option)
+            val popupMenu = PopupMenu(requireContext(), it)
+            popupMenu.setOnMenuItemClickListener { item ->
+                when(item.itemId){
+                    R.id.menu_b_sort_name ->{
+                        viewModel.sortRecipes(RecipeSortBy.NAME)
+                        true
+                    }
+                    R.id.menu_b_sort_missing ->{
+                        viewModel.sortRecipes(RecipeSortBy.MISSING_ITEMS_REVERSED)
+                        true
+                    }
+                    R.id.menu_b_sort_rating ->{
+                        viewModel.sortRecipes(RecipeSortBy.RATING)
+                        true
+                    }
+                    R.id.menu_b_sort_time ->{
+                        viewModel.sortRecipes(RecipeSortBy.COOK_TIME)
+                        true
+                    }
+                    else -> false
                 }
-            }).show()
+            }
+            popupMenu.inflate(R.menu.sort_recipies_menu)
+            popupMenu.show()
         }
     }
 

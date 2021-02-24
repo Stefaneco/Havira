@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_b_sort_name"
+        android:title="@string/name"/>
+    <item android:id="@+id/menu_b_sort_rating"
+        android:title="@string/rating"/>
+    <item android:id="@+id/menu_b_sort_time"
+        android:title="@string/cook_time"/>
+    <item android:id="@+id/menu_b_sort_missing"
+        android:title="@string/in_stock"/>
+</menu>
