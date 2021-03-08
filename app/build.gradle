@@ -26,6 +26,14 @@ android {
         }
     }
 
+    viewBinding {
+        enabled = true
+    }
+    //in android 4.0+ we use
+    //buildFeatures {
+        //viewBinding true
+    //}
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

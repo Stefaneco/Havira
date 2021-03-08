@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clean.R
+import com.example.clean.databinding.CardRecipeBinding
 import com.example.core.entites.Recipe
 import kotlinx.android.synthetic.main.card_recipe.view.*
-import kotlinx.android.synthetic.main.card_recipe_green.view.*
 
 class RecipeAdapter(private var recipes: List<Recipe>, private val action: ItemDetailAction):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -21,25 +21,25 @@ class RecipeAdapter(private var recipes: List<Recipe>, private val action: ItemD
         notifyDataSetChanged()
     }
 
-    inner class GreenViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class GreenViewHolder(private val binding: CardRecipeBinding): RecyclerView.ViewHolder(binding.root){
          fun setGreenDetails(recipe: Recipe){
-             itemView.setBackgroundColor(itemView.context.resources.getColor(R.color.colorOk))
-             itemView.tv_name.text = recipe.name
-             itemView.tv_rating.text = recipe.rating.toString()
-             itemView.tv_servings.text = recipe.servings.toString()
-             itemView.tv_time.text = recipe.cookTime.toString()
+             binding.root.setBackgroundColor(itemView.context.resources.getColor(R.color.colorOk))
+             binding.tvCardRecipeName.text = recipe.name
+             binding.tvCardRecipeRating.text = recipe.rating.toString()
+             binding.tvCardRecipeServings.text = recipe.servings.toString()
+             binding.tvCardRecipeTime.text = recipe.cookTime.toString()
              itemView.setOnClickListener {
                  action.onItemClick(recipe.name)
              }
         }
     }
 
-    inner class RedViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class RedViewHolder(private val binding: CardRecipeBinding): RecyclerView.ViewHolder(binding.root){
          fun setRedDetails(recipe: Recipe){
-            itemView.tv_name.text = recipe.name
-            itemView.tv_rating.text = recipe.rating.toString()
-            itemView.tv_servings.text = recipe.servings.toString()
-            itemView.tv_time.text = recipe.cookTime.toString()
+             binding.tvCardRecipeName.text = recipe.name
+             binding.tvCardRecipeRating.text = recipe.rating.toString()
+             binding.tvCardRecipeServings.text = recipe.servings.toString()
+             binding.tvCardRecipeTime.text = recipe.cookTime.toString()
              itemView.setOnClickListener {
                  action.onItemClick(recipe.name)
              }
@@ -49,13 +49,11 @@ class RecipeAdapter(private var recipes: List<Recipe>, private val action: ItemD
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view: View
         return if(viewType == GREEN){
-            view = LayoutInflater.from(parent.context).inflate(R.layout.card_recipe,
-                parent, false)
-            GreenViewHolder(view)
+            val binding = CardRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            GreenViewHolder(binding)
         } else {
-            view = LayoutInflater.from(parent.context).inflate(R.layout.card_recipe,
-                parent, false)
-            RedViewHolder(view)
+            val binding = CardRecipeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            RedViewHolder(binding)
         }
 
     }

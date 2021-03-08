@@ -13,6 +13,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.clean.R
+import com.example.clean.databinding.FragmentFridgeBinding
+import com.example.clean.databinding.FragmentFridgeItemDetailBinding
 import com.example.clean.ui.adapter.RecipeCategoryAction
 import com.example.clean.ui.adapter.RecipeCategoryAdapter
 import com.example.clean.ui.adapter.RecipeSelectedCategoryAdapter
@@ -23,7 +25,8 @@ import kotlinx.android.synthetic.main.fragment_recipe_add.*
 
 @AndroidEntryPoint
 class FridgeItemDetailFragment : Fragment(), RecipeCategoryAction {
-
+    private var _binding: FragmentFridgeItemDetailBinding? = null
+    private val binding get() = _binding!!
     private val viewModel by viewModels<FridgeItemDetailViewModel>()
     private val args: FridgeItemDetailFragmentArgs by navArgs()
     private val categoriesAdapter = RecipeCategoryAdapter(this)
@@ -33,7 +36,8 @@ class FridgeItemDetailFragment : Fragment(), RecipeCategoryAction {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_fridge_item_detail, container, false)
+        _binding = FragmentFridgeItemDetailBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,6 +56,11 @@ class FridgeItemDetailFragment : Fragment(), RecipeCategoryAction {
         viewModel.loadItem(args.itemName,args.itemUnit)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun observeViewModel(){
         viewModel.selectedCategories.observe(viewLifecycleOwner, Observer {
             selectedCategoriesAdapter.updateCategories(it)
@@ -60,9 +69,9 @@ class FridgeItemDetailFragment : Fragment(), RecipeCategoryAction {
             categoriesAdapter.updateCategories(it)
         })
         viewModel.fridgeItem.observe(viewLifecycleOwner, Observer {
-            et_fridgeDetail_amount.setText(it.amount.toString())
-            et_fridgeDetail_name.setText(it.name)
-            et_fridgeDetail_unit.setText(it.unit)
+            binding.etFridgeDetailAmount.setText(it.amount.toString())
+            binding.etFridgeDetailName.setText(it.name)
+            binding.etFridgeDetailUnit.setText(it.unit)
         })
         viewModel.isUpdateFinished.observe(viewLifecycleOwner, Observer {
             if (it) {
@@ -80,21 +89,21 @@ class FridgeItemDetailFragment : Fragment(), RecipeCategoryAction {
     }
 
     private fun setupRecyclerViews(){
-        rv_fridgeDetail_categories.apply {
+        binding.rvFridgeDetailCategories.apply {
             adapter = categoriesAdapter
             layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         }
-        rv_fridgeDetail_selectedCategories.apply {
+        binding.rvFridgeDetailSelectedCategories.apply {
             adapter = selectedCategoriesAdapter
             layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         }
     }
 
     private fun setupButtonsOnClicks(){
-        b_fridgeDetail_addCategory.setOnClickListener {
+        binding.bFridgeDetailAddCategory.setOnClickListener {
             viewModel.checkCategory(et_fridgeDetail_searchCategory.text.toString())
         }
-        b_fridgeDetail_subbmit.setOnClickListener {
+        binding.bFridgeDetailSubbmit.setOnClickListener {
             viewModel.updateItem(et_fridgeDetail_name.text.toString(),
             et_fridgeDetail_amount.text.toString().toFloat(),
             et_fridgeDetail_unit.text.toString())
@@ -103,7 +112,7 @@ class FridgeItemDetailFragment : Fragment(), RecipeCategoryAction {
     }
 
     private fun setupCategorySearch(){
-        et_fridgeDetail_searchCategory.addTextChangedListener(object: TextWatcher{
+        binding.etFridgeDetailSearchCategory.addTextChangedListener(object: TextWatcher{
             override fun afterTextChanged(s: Editable?) {
                 viewModel.setCategoryFilter(s.toString())
             }

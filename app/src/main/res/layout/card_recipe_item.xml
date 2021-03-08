@@ -8,7 +8,7 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/tv_cardRecipeItem_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -18,17 +18,17 @@
         android:textColor="@color/colorFont"/>
 
     <TextView
-        android:id="@+id/tv_amount"
+        android:id="@+id/tv_cardRecipeItem_amount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/tv_unit"
+        app:layout_constraintEnd_toStartOf="@+id/tv_cardRecipeItem_unit"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.20"
         android:textColor="@color/colorFont"/>
 
     <TextView
-        android:id="@+id/tv_unit"
+        android:id="@+id/tv_cardRecipeItem_unit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"

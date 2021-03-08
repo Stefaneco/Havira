@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clean.R
+import com.example.clean.databinding.CardShoppingBinding
 import com.example.core.entites.ShoppingItem
 import kotlinx.android.synthetic.main.card_shopping.view.*
 
@@ -19,31 +20,31 @@ class ShoppingAdapter(private var items: List<ShoppingItem>, private val action:
         notifyDataSetChanged()
     }
 
-    inner class CheckedViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class CheckedViewHolder(private val binding: CardShoppingBinding): RecyclerView.ViewHolder(binding.root){
         fun setCheckedDetails(shoppingItem: ShoppingItem){
-            itemView.cb_nameShoppingCard.text = shoppingItem.name
+            binding.cbCardShoppingName.text = shoppingItem.name
             if(shoppingItem.amount % 1.0 == 0.0)
-                itemView.tv_amountShoppingCard.text = shoppingItem.amount.toInt().toString()
+                binding.tvCardShoppingAmount.text = shoppingItem.amount.toInt().toString()
             else
-                itemView.tv_amountShoppingCard.text = shoppingItem.amount.toString()
-            itemView.tv_unitShoppingCard.text = shoppingItem.unit
-            itemView.cb_nameShoppingCard.isChecked = true
-            itemView.cb_nameShoppingCard.setOnCheckedChangeListener{ _, _ ->
+                binding.tvCardShoppingAmount.text = shoppingItem.amount.toString()
+            binding.tvCardShoppingUnit.text = shoppingItem.unit
+            binding.cbCardShoppingName.isChecked = true
+            binding.cbCardShoppingName.setOnCheckedChangeListener{ _, _ ->
                 action.onItemClicked(shoppingItem.name,shoppingItem.unit,shoppingItem.isChecked)
             }
         }
     }
 
-    inner class UncheckedViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class UncheckedViewHolder(private val binding: CardShoppingBinding): RecyclerView.ViewHolder(binding.root){
         fun setUncheckedDetails(shoppingItem: ShoppingItem){
-            itemView.cb_nameShoppingCard.text = shoppingItem.name
+            binding.cbCardShoppingName.text = shoppingItem.name
             if(shoppingItem.amount % 1.0 == 0.0)
-                itemView.tv_amountShoppingCard.text = shoppingItem.amount.toInt().toString()
+                binding.tvCardShoppingAmount.text = shoppingItem.amount.toInt().toString()
             else
-                itemView.tv_amountShoppingCard.text = shoppingItem.amount.toString()
-            itemView.tv_unitShoppingCard.text = shoppingItem.unit
-            itemView.cb_nameShoppingCard.isChecked = false
-            itemView.cb_nameShoppingCard.setOnCheckedChangeListener{ _, _ ->
+                binding.tvCardShoppingAmount.text = shoppingItem.amount.toString()
+            binding.tvCardShoppingUnit.text = shoppingItem.unit
+            binding.cbCardShoppingName.isChecked = false
+            binding.cbCardShoppingName.setOnCheckedChangeListener{ _, _ ->
                 action.onItemClicked(shoppingItem.name,shoppingItem.unit,shoppingItem.isChecked)
             }
         }
@@ -57,11 +58,11 @@ class ShoppingAdapter(private var items: List<ShoppingItem>, private val action:
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view: View
         return if (viewType == CHECKED){
-            view = LayoutInflater.from(parent.context).inflate(R.layout.card_shopping,parent,false)
-            CheckedViewHolder(view)
+            val binding = CardShoppingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            CheckedViewHolder(binding)
         } else{
-            view = LayoutInflater.from(parent.context).inflate(R.layout.card_shopping,parent,false)
-            UncheckedViewHolder(view)
+            val binding = CardShoppingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            UncheckedViewHolder(binding)
         }
     }
 

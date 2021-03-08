@@ -9,7 +9,7 @@
     android:padding="2dp">
 
     <CheckBox
-        android:id="@+id/cb_nameShoppingCard"
+        android:id="@+id/cb_cardShopping_name"
         android:layout_width="0dp"
         android:layout_height="28dp"
         android:background="@color/white"
@@ -21,7 +21,7 @@
         app:layout_constraintWidth_percent="0.75" />
 
     <TextView
-        android:id="@+id/tv_unitShoppingCard"
+        android:id="@+id/tv_cardShopping_unit"
         android:layout_width="0dp"
         android:layout_height="28dp"
         android:text="Text"
@@ -34,7 +34,7 @@
         android:textColor="@color/colorFont"/>
 
     <TextView
-        android:id="@+id/tv_amountShoppingCard"
+        android:id="@+id/tv_cardShopping_amount"
         android:layout_width="0dp"
         android:layout_height="28dp"
         android:background="@color/white"
@@ -42,8 +42,8 @@
         android:text="Text"
         android:textColor="@color/colorFont"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/tv_unitShoppingCard"
-        app:layout_constraintStart_toEndOf="@+id/cb_nameShoppingCard"
+        app:layout_constraintEnd_toStartOf="@+id/tv_cardShopping_unit"
+        app:layout_constraintStart_toEndOf="@+id/cb_cardShopping_name"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,6 +14,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.clean.R
+import com.example.clean.databinding.FragmentFridgeBinding
+import com.example.clean.databinding.FragmentRecipeBinding
 import com.example.clean.ui.adapter.*
 import com.example.clean.ui.adapter.decoration.MarginItemDecorationHeight
 import com.example.clean.ui.viewmodel.RecipeViewModel
@@ -23,7 +25,8 @@ import kotlinx.android.synthetic.main.fragment_recipe.*
 
 @AndroidEntryPoint
 class RecipeFragment : Fragment(), ItemDetailAction, RecipeCategoryAction {
-
+    private var _binding: FragmentRecipeBinding? = null
+    private val binding get() = _binding!!
     private val viewModel by viewModels<RecipeViewModel>()
     private val recipeAdapter = RecipeAdapter(listOf(), this)
     private val categoriesAdapter = RecipeCategoryAdapter(this)
@@ -33,23 +36,27 @@ class RecipeFragment : Fragment(), ItemDetailAction, RecipeCategoryAction {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_recipe, container, false)
+        _binding = FragmentRecipeBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         observeViewModel()
         setupRecyclerViews()
         setupButtonsOnClicks()
         setupCategorySearch()
-
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.loadCategoriesAndRecipes()
         observeViewModel()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onItemClick(name: String) {
@@ -78,40 +85,40 @@ class RecipeFragment : Fragment(), ItemDetailAction, RecipeCategoryAction {
     }
 
     private fun setupRecyclerViews(){
-        rv_recipes.layoutManager = LinearLayoutManager(context)
-        rv_recipes.adapter = recipeAdapter
-        rv_recipes.setHasFixedSize(true)
-        rv_recipes.addItemDecoration(MarginItemDecorationHeight(5))
-
-        rv_categoriesRecipe.apply {
+        binding.rvRecipeRecipes.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = recipeAdapter
+            setHasFixedSize(true)
+            addItemDecoration(MarginItemDecorationHeight(5))
+        }
+        binding.rvRecipeCategories.apply {
             adapter = categoriesAdapter
             layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         }
-        rv_selectedCategoriesRecipe.apply {
+        binding.rvRecipeSelectedCategories.apply {
             adapter = selectedCategoriesAdapter
             layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         }
-
     }
 
     private fun setupButtonsOnClicks(){
-        b_addRecipe.setOnClickListener {
+        binding.bRecipeAddRecipe.setOnClickListener {
             val action = RecipeFragmentDirections.actionRecipeFragmentToRecipeAddFragment(null)
             findNavController().navigate(action)
         }
-        b_categories.setOnClickListener {
-            if(et_searchCategoryRecipe.visibility == View.GONE){
-                rv_categoriesRecipe.visibility = View.VISIBLE
-                rv_selectedCategoriesRecipe.visibility = View.VISIBLE
-                et_searchCategoryRecipe.visibility = View.VISIBLE
+        binding.bRecipeCategories.setOnClickListener {
+            if(binding.etRecipeSearchCategory.visibility == View.GONE){
+                binding.rvRecipeCategories.visibility = View.VISIBLE
+                binding.rvRecipeSelectedCategories.visibility = View.VISIBLE
+                binding.etRecipeSearchCategory.visibility = View.VISIBLE
             }
             else{
-                rv_categoriesRecipe.visibility = View.GONE
-                rv_selectedCategoriesRecipe.visibility = View.GONE
-                et_searchCategoryRecipe.visibility = View.GONE
+                binding.rvRecipeCategories.visibility = View.GONE
+                binding.rvRecipeSelectedCategories.visibility = View.GONE
+                binding.etRecipeSearchCategory.visibility = View.GONE
             }
         }
-        b_sortByRecipe.setOnClickListener {
+        binding.bRecipeSortBy.setOnClickListener {
             val popupMenu = PopupMenu(requireContext(), it)
             popupMenu.setOnMenuItemClickListener { item ->
                 when(item.itemId){
@@ -140,7 +147,7 @@ class RecipeFragment : Fragment(), ItemDetailAction, RecipeCategoryAction {
     }
 
     private fun setupCategorySearch(){
-        et_searchCategoryRecipe.addTextChangedListener(object : TextWatcher {
+        binding.etRecipeSearchCategory.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 viewModel.setCategoryFilter(s.toString())
             }

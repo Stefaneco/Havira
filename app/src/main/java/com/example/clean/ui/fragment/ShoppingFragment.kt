@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.clean.R
+import com.example.clean.databinding.FragmentRecipeDetailBinding
+import com.example.clean.databinding.FragmentShoppingBinding
 import com.example.clean.ui.adapter.ShoppingAdapter
 import com.example.clean.ui.adapter.ShoppingCheckAction
 import com.example.clean.ui.dialog.AddShoppingItemDialog
@@ -21,7 +23,8 @@ import kotlinx.android.synthetic.main.fragment_shopping.*
 
 @AndroidEntryPoint
 class ShoppingFragment : Fragment(), ShoppingCheckAction {
-
+    private var _binding: FragmentShoppingBinding? = null
+    private val binding get() = _binding!!
     private val viewModel by viewModels<ShoppingViewModel>()
     private val shoppingAdapter = ShoppingAdapter(listOf(), this)
 
@@ -29,7 +32,8 @@ class ShoppingFragment : Fragment(), ShoppingCheckAction {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_shopping, container, false)
+        _binding = FragmentShoppingBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,6 +48,11 @@ class ShoppingFragment : Fragment(), ShoppingCheckAction {
         viewModel.loadItems()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun observeViewModel(){
         viewModel.loadItems()
         viewModel.shoppingItems.observe(viewLifecycleOwner, Observer {
@@ -52,20 +61,20 @@ class ShoppingFragment : Fragment(), ShoppingCheckAction {
     }
 
     private fun setupButtonsOnClicks(){
-        b_addItemShopping.setOnClickListener {
+        binding.bShoppingAddItem.setOnClickListener {
             AddShoppingItemDialog(requireContext(), object : AddShoppingItemListener{
                 override fun addShoppingItem(item: ShoppingItem) {
                     viewModel.addShoppingItem(item)
                 }
             }).show()
         }
-        b_FinishShopping.setOnClickListener {
+        binding.bShoppingFinish.setOnClickListener {
             viewModel.moveItemsToFridge()
         }
     }
 
     private fun setupRecyclerViews(){
-        rv_listShopping.apply {
+        binding.rvShoppingList.apply {
             setHasFixedSize(true)
             adapter = shoppingAdapter
             layoutManager = LinearLayoutManager(requireContext())

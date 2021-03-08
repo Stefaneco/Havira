@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clean.R
+import com.example.clean.databinding.CardRecipeCategoryBinding
 import kotlinx.android.synthetic.main.card_recipe_category.view.*
 
 class RecipeCategoryAdapter(val actions: RecipeCategoryAction):
@@ -16,9 +17,9 @@ class RecipeCategoryAdapter(val actions: RecipeCategoryAction):
         notifyDataSetChanged()
     }
 
-    inner class RecipeCategoryViewHolder(view: View): RecyclerView.ViewHolder(view){
-        private val name = view.tv_name
-        private val layout = view.categoryLayout
+    inner class RecipeCategoryViewHolder(private val binding: CardRecipeCategoryBinding): RecyclerView.ViewHolder(binding.root){
+        private val name = binding.tvCardRecipeCategoryName
+        private val layout = binding.cslCardRecipeCategoryLayout
 
         fun bind(category: String){
             name.text = category
@@ -28,7 +29,7 @@ class RecipeCategoryAdapter(val actions: RecipeCategoryAction):
     } }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = RecipeCategoryViewHolder(
-    LayoutInflater.from(parent.context).inflate(R.layout.card_recipe_category, parent, false)
+        CardRecipeCategoryBinding.inflate(LayoutInflater.from(parent.context),parent,false)
     )
 
     override fun getItemCount() = categories.size

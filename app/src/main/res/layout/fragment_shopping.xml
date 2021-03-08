@@ -7,27 +7,27 @@
     tools:context=".ui.fragment.ShoppingFragment">
 
     <Button
-        android:id="@+id/b_historyShopping"
+        android:id="@+id/b_shopping_history"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/trzy_kropeczki"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_listShopping"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_shopping_screenName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_listShopping" />
+        app:layout_constraintTop_toTopOf="@+id/tv_shopping_screenName" />
 
     <Button
-        android:id="@+id/b_FinishShopping"
+        android:id="@+id/b_shopping_finish"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/ic_ok"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_listShopping"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_shopping_screenName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_listShopping" />
+        app:layout_constraintTop_toTopOf="@+id/tv_shopping_screenName" />
 
     <TextView
-        android:id="@+id/tv_listShopping"
+        android:id="@+id/tv_shopping_screenName"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
@@ -38,8 +38,8 @@
         android:text="SHOPPING LIST"
         android:textColor="@color/colorFont"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/b_addItemShopping"
-        app:layout_constraintStart_toEndOf="@+id/b_historyShopping"
+        app:layout_constraintEnd_toStartOf="@+id/b_shopping_addItem"
+        app:layout_constraintStart_toEndOf="@+id/b_shopping_history"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
@@ -48,10 +48,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_listShopping">
+        app:layout_constraintTop_toBottomOf="@+id/tv_shopping_screenName">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_listShopping"
+            android:id="@+id/rv_shopping_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="8dp"
@@ -64,20 +64,20 @@
             app:layout_constraintHeight_default="wrap"
             app:layout_constraintHeight_max="0dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_listShopping" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_shopping_screenName" />
 
     </ScrollView>
 
 
 
     <Button
-        android:id="@+id/b_addItemShopping"
+        android:id="@+id/b_shopping_addItem"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/ic_plus"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_listShopping"
-        app:layout_constraintEnd_toStartOf="@+id/b_FinishShopping"
-        app:layout_constraintTop_toTopOf="@+id/tv_listShopping" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_shopping_screenName"
+        app:layout_constraintEnd_toStartOf="@+id/b_shopping_finish"
+        app:layout_constraintTop_toTopOf="@+id/tv_shopping_screenName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,15 +16,15 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/border_accent_primarydark"
         android:gravity="center"
-        android:text="RECIPES"
+        android:text="@string/recipes"
         android:textColor="@color/colorFont"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/b_categories"
-        app:layout_constraintStart_toEndOf="@+id/b_addRecipe"
+        app:layout_constraintEnd_toStartOf="@+id/b_recipe_categories"
+        app:layout_constraintStart_toEndOf="@+id/b_recipe_addRecipe"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/b_addRecipe"
+        android:id="@+id/b_recipe_addRecipe"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
@@ -35,27 +35,27 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_recipes"
+        android:id="@+id/rv_recipe_recipes"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_categoriesRecipe" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_recipe_categories" />
 
     <Button
-        android:id="@+id/b_categories"
+        android:id="@+id/b_recipe_categories"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginRight="8dp"
         android:background="@drawable/ic_categories"
         app:layout_constraintBottom_toBottomOf="@+id/tv_recipe_title"
-        app:layout_constraintEnd_toStartOf="@+id/b_sortByRecipe"
+        app:layout_constraintEnd_toStartOf="@+id/b_recipe_sortBy"
         app:layout_constraintTop_toTopOf="@+id/tv_recipe_title" />
 
     <Button
-        android:id="@+id/b_sortByRecipe"
+        android:id="@+id/b_recipe_sortBy"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginRight="8dp"
@@ -65,35 +65,35 @@
         app:layout_constraintTop_toTopOf="@+id/tv_recipe_title" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_selectedCategoriesRecipe"
+        android:id="@+id/rv_recipe_selectedCategories"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/b_addRecipe" />
+        app:layout_constraintTop_toBottomOf="@+id/b_recipe_addRecipe" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_categoriesRecipe"
+        android:id="@+id/rv_recipe_categories"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_searchCategoryRecipe" />
+        app:layout_constraintTop_toBottomOf="@+id/et_recipe_searchCategory" />
 
     <EditText
-        android:id="@+id/et_searchCategoryRecipe"
+        android:id="@+id/et_recipe_searchCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="search"
+        android:hint="@string/search"
         android:inputType="textPersonName"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_selectedCategoriesRecipe"
+        app:layout_constraintTop_toBottomOf="@+id/rv_recipe_selectedCategories"
         android:textColor="@color/colorFont"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,16 +20,16 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/recipe_add_layout_values_bar"
+                android:id="@+id/csl_addRecipe_valuesBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/et_name">
+                app:layout_constraintTop_toBottomOf="@id/et_recipeAdd_name">
 
                 <EditText
-                    android:id="@+id/et_servings"
+                    android:id="@+id/et_recipeAdd_servings"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorAccent"
@@ -46,7 +46,7 @@
                     android:gravity="center"/>
 
                 <EditText
-                    android:id="@+id/et_time"
+                    android:id="@+id/et_recipeAdd_time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorAccent"
@@ -56,15 +56,15 @@
                     android:maxLength="@integer/cookTimeMaxLength"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/et_rating"
-                    app:layout_constraintStart_toEndOf="@+id/et_servings"
+                    app:layout_constraintEnd_toStartOf="@+id/et_recipeAdd_rating"
+                    app:layout_constraintStart_toEndOf="@+id/et_recipeAdd_servings"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent=".30"
                     android:gravity="center"
                     android:textColorHint="@color/white" />
 
                 <EditText
-                    android:id="@+id/et_rating"
+                    android:id="@+id/et_recipeAdd_rating"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/colorAccent"
@@ -81,7 +81,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/recipe_add_layout_items"
+                android:id="@+id/csl_addRecipe_items"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"
@@ -89,11 +89,11 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recipe_add_layout_values_bar"
+                app:layout_constraintTop_toBottomOf="@+id/csl_addRecipe_valuesBar"
                 android:background="@drawable/border_primary">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_items"
+                    android:id="@+id/rv_recipeAdd_items"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
@@ -103,7 +103,7 @@
                     android:background="@color/colorPrimary"/>
 
                 <Button
-                    android:id="@+id/b_addItem"
+                    android:id="@+id/b_recipeAdd_addItem"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="16dp"
@@ -112,14 +112,14 @@
                     android:background="@drawable/ic_plus"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rv_items" />
+                    app:layout_constraintTop_toBottomOf="@+id/rv_recipeAdd_items" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
             <Button
-                android:id="@+id/b_submit"
+                android:id="@+id/b_recipeAdd_submit"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="8dp"
@@ -129,7 +129,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/et_name"
+                android:id="@+id/et_recipeAdd_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -144,19 +144,19 @@
                 android:textSize="25sp"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_categoriesRecipeAd"
+                android:id="@+id/rv_recipeAdd_categories"
                 android:layout_width="409dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_searchCategory"
+                app:layout_constraintTop_toBottomOf="@+id/et_recipeAdd_searchCategory"
                 android:background="@color/colorPrimary"/>
 
 
 
             <EditText
-                android:id="@+id/et_instructions"
+                android:id="@+id/et_recipeAdd_instructions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -168,13 +168,13 @@
                 android:inputType="textMultiLine"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recipe_add_layout_items"
+                app:layout_constraintTop_toBottomOf="@+id/csl_addRecipe_items"
                 android:textColor="@color/colorFont"
                 android:background="@drawable/border_primary"
                 android:padding="8dp"/>
 
             <EditText
-                android:id="@+id/et_searchCategory"
+                android:id="@+id/et_recipeAdd_searchCategory"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -183,13 +183,13 @@
                 android:hint="Search Category"
                 android:inputType="textPersonName"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rv_selectedCategoriesRecipeAd"
+                app:layout_constraintTop_toBottomOf="@+id/rv_recipeAdd_selectedCategories"
                 app:layout_constraintWidth_percent="0.70"
                 android:textColor="@color/colorFont"
                 android:maxLength="@integer/categoryMaxLength"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_selectedCategoriesRecipeAd"
+                android:id="@+id/rv_recipeAdd_selectedCategories"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -197,18 +197,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_instructions" />
+                app:layout_constraintTop_toBottomOf="@+id/et_recipeAdd_instructions" />
 
             <Button
-                android:id="@+id/b_addCategory"
+                android:id="@+id/b_recipeAdd_addCategory"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/ic_ok"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/et_searchCategory"
-                app:layout_constraintTop_toBottomOf="@+id/rv_selectedCategoriesRecipeAd" />
+                app:layout_constraintStart_toEndOf="@+id/et_recipeAdd_searchCategory"
+                app:layout_constraintTop_toBottomOf="@+id/rv_recipeAdd_selectedCategories" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

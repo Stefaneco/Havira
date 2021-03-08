@@ -13,6 +13,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.clean.R
+import com.example.clean.databinding.FragmentFridgeBinding
+import com.example.clean.databinding.FragmentRecipeDetailBinding
 import com.example.clean.ui.adapter.decoration.MarginItemDecoration
 import com.example.clean.ui.adapter.RecipeDetailCategoryAdapter
 import com.example.clean.ui.adapter.RecipeItemAdapter
@@ -23,7 +25,8 @@ import kotlinx.android.synthetic.main.fragment_recipe_detail.rv_items
 
 @AndroidEntryPoint
 class RecipeDetailFragment : Fragment() {
-
+    private var _binding: FragmentRecipeDetailBinding? = null
+    private val binding get() = _binding!!
     private val viewModel by viewModels<RecipeDetailViewModel>()
     private val categoriesAdapter = RecipeDetailCategoryAdapter()
     private val itemsAdapter = RecipeItemAdapter(listOf())
@@ -34,7 +37,8 @@ class RecipeDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_recipe_detail, container, false)
+        _binding = FragmentRecipeDetailBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,17 +50,17 @@ class RecipeDetailFragment : Fragment() {
             adapter = itemsAdapter
             layoutManager = LinearLayoutManager(context)
         }
-        rv_selectedCategoriesRecipe.apply {
+        binding.rvRecipeDetailSelectedCategories.apply {
             adapter = categoriesAdapter
             layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
             addItemDecoration(MarginItemDecoration(15))
         }
-        b_edit.setOnClickListener {
+        binding.bRecipeDetailEdit.setOnClickListener {
             val popupMenu = PopupMenu(requireContext(), it)
             popupMenu.setOnMenuItemClickListener { item ->
                 when(item.itemId){
                     R.id.menu_b_edit -> {
-                        val action = RecipeDetailFragmentDirections.actionRecipeDetailFragmentToRecipeAddFragment(tv_name.text.toString())
+                        val action = RecipeDetailFragmentDirections.actionRecipeDetailFragmentToRecipeAddFragment(binding.tvRecipeDetailName.text.toString())
                         findNavController().navigate(action)
                         true
                     }
@@ -71,7 +75,7 @@ class RecipeDetailFragment : Fragment() {
             popupMenu.inflate(R.menu.edit_delete_menu)
             popupMenu.show()
         }
-        b_makeRecipeDetail.setOnClickListener {
+        binding.bRecipeDetailMake.setOnClickListener {
             viewModel.makeRecipe()
         }
         b_recipeDetail_toCart.setOnClickListener {
@@ -81,13 +85,18 @@ class RecipeDetailFragment : Fragment() {
         observeViewModel()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun observeViewModel(){
         viewModel.recipe.observe(viewLifecycleOwner, Observer {
-            tv_name.text = it.name
-            tv_rating.text = it.rating.toString()
-            tv_time.text = it.cookTime.toString()
-            tv_servings.text = it.servings.toString()
-            tv_instructions.text = it.description
+            binding.tvRecipeDetailName.text = it.name
+            binding.tvRecipeDetailRating.text = it.rating.toString()
+            binding.tvRecipeDetailTime.text = it.cookTime.toString()
+            binding.tvRecipeDetailServings.text = it.servings.toString()
+            binding.tvRecipeDetailInstructions.text = it.description
             itemsAdapter.updateItems(it.items)
             it.categories.let { it1 -> categoriesAdapter.updateCategories(it1) }
         })

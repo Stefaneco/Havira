@@ -8,7 +8,7 @@
 
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/tv_recipeDetail_name"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
@@ -19,19 +19,19 @@
         android:text="TextView"
         android:textColor="@color/colorFont"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/b_makeRecipeDetail"
+        app:layout_constraintEnd_toStartOf="@+id/b_recipeDetail_make"
         app:layout_constraintStart_toEndOf="@+id/b_recipeDetail_toCart"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/recipe_detail_layout_info"
+        android:id="@+id/ll_recipeDetail_infoBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_recipeDetail_name"
         android:background="@color/colorPrimary"
         android:layout_marginTop="16dp"
         android:padding="6dp">
@@ -44,7 +44,7 @@
             android:layout_marginEnd="16dp">
 
             <TextView
-                android:id="@+id/tv_servings"
+                android:id="@+id/tv_recipeDetail_servings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -68,7 +68,7 @@
         android:background="@color/white">
 
         <TextView
-            android:id="@+id/tv_time"
+            android:id="@+id/tv_recipeDetail_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="time"
@@ -94,7 +94,7 @@
         android:layout_marginStart="16dp">
 
         <TextView
-            android:id="@+id/tv_rating"
+            android:id="@+id/tv_recipeDetail_rating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="rating"
@@ -118,7 +118,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_selectedCategoriesRecipe"
+        android:id="@+id/rv_recipeDetail_selectedCategories"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -126,7 +126,7 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipe_detail_layout_info"
+        app:layout_constraintTop_toBottomOf="@+id/ll_recipeDetail_infoBar"
         android:background="@color/colorPrimary"
         android:padding="8dp" />
 
@@ -141,10 +141,10 @@
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_selectedCategoriesRecipe" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_recipeDetail_selectedCategories" />
 
     <TextView
-        android:id="@+id/tv_instructions"
+        android:id="@+id/tv_recipeDetail_instructions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -158,24 +158,24 @@
         android:layout_margin="8dp" />
 
     <Button
-        android:id="@+id/b_edit"
+        android:id="@+id/b_recipeDetail_edit"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/trzy_kropeczki"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_recipeDetail_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_name" />
+        app:layout_constraintTop_toTopOf="@+id/tv_recipeDetail_name" />
 
     <Button
-        android:id="@+id/b_makeRecipeDetail"
+        android:id="@+id/b_recipeDetail_make"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/ic_do_recipe"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
-        app:layout_constraintEnd_toStartOf="@+id/b_edit"
-        app:layout_constraintTop_toTopOf="@+id/tv_name" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_recipeDetail_name"
+        app:layout_constraintEnd_toStartOf="@+id/b_recipeDetail_edit"
+        app:layout_constraintTop_toTopOf="@+id/tv_recipeDetail_name" />
 
     <Button
         android:id="@+id/b_recipeDetail_toCart"
@@ -183,9 +183,9 @@
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/ic_add_to_shopping"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_recipeDetail_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tv_name" />
+        app:layout_constraintTop_toTopOf="@+id/tv_recipeDetail_name" />
 
 
 

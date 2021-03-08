@@ -7,7 +7,7 @@
     android:padding="8dp">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/ll_addInFridgeItem_values"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -16,56 +16,56 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/et_name"
+            android:id="@+id/et_addInFridgeItem_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="name"
+            android:hint="@string/name"
             android:inputType="text"
             android:maxLength="@integer/productMaxLength"/>
 
         <EditText
-            android:id="@+id/et_amount"
+            android:id="@+id/et_addInFridgeItem_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:ems="10"
-            android:hint="amount"
+            android:hint="@string/amount"
             android:inputType="number|numberDecimal"
 
             android:maxLength="@integer/amountMaxLength"/>
 
         <EditText
-            android:id="@+id/et_unit"
+            android:id="@+id/et_addInFridgeItem_unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:ems="10"
-            android:hint="unit"
+            android:hint="@string/unit"
             android:inputType="textPersonName"
             android:maxLength="@integer/unitMaxLength"/>
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tv_add"
+        android:id="@+id/tv_addInFridgeItem_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:clickable="true"
-        android:text="ADD"
+        android:text="@string/add"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/ll_addInFridgeItem_values" />
 
     <TextView
-        android:id="@+id/tv_cancel"
+        android:id="@+id/tv_addInFridgeItem_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:clickable="true"
-        android:text="CANCEL"
-        app:layout_constraintEnd_toStartOf="@+id/tv_add"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        android:text="@string/cancel"
+        app:layout_constraintEnd_toStartOf="@+id/tv_addInFridgeItem_add"
+        app:layout_constraintTop_toBottomOf="@+id/ll_addInFridgeItem_values" />
 </androidx.constraintlayout.widget.ConstraintLayout>

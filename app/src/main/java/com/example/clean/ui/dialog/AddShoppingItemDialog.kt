@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDialog
 import com.example.clean.R
+import com.example.clean.databinding.DialogAddInFridgeItemBinding
 import com.example.core.entites.ShoppingItem
 import kotlinx.android.synthetic.main.dialog_add_in_fridge_item.*
 
@@ -14,18 +15,18 @@ AppCompatDialog(context){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_add_in_fridge_item)
 
-        tv_add.setOnClickListener {
-            if(et_amount.text.any() && et_name.text.any()){
+        tv_addInFridgeItem_add.setOnClickListener {
+            if(et_addInFridgeItem_amount.text.any() && et_addInFridgeItem_name.text.any()){
                 dialogListener.addShoppingItem(ShoppingItem(
-                    name = et_name.text.toString(),
+                    name = et_addInFridgeItem_name.text.toString(),
                     recipeName = "",
-                    amount = et_amount.text.toString().toFloat(),
-                    unit = et_unit.text.toString()
+                    amount = et_addInFridgeItem_amount.text.toString().toFloat(),
+                    unit = et_addInFridgeItem_unit.text.toString()
                 ))
                 dismiss()
             }
         }
-        tv_cancel.setOnClickListener {
+        tv_addInFridgeItem_cancel.setOnClickListener {
             dismiss()
         }
     }

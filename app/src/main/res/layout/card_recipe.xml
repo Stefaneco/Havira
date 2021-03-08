@@ -12,7 +12,7 @@
     android:background="@color/colorPrimary">
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/tv_cardRecipe_name"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:background="@color/white"
@@ -22,13 +22,13 @@
         android:text="TextView"
         android:textColor="@color/colorFont"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/recipe_card_vertical_layout"
+        app:layout_constraintBottom_toBottomOf="@+id/ll_cardRecipe_values"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.71" />
 
     <LinearLayout
-        android:id="@+id/recipe_card_vertical_layout"
+        android:id="@+id/ll_cardRecipe_values"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:orientation="vertical"
@@ -38,7 +38,7 @@
         app:layout_constraintWidth_percent="0.27">
 
         <TextView
-            android:id="@+id/tv_rating"
+            android:id="@+id/tv_cardRecipe_rating"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="3dp"
@@ -57,7 +57,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_servings"
+                android:id="@+id/tv_cardRecipe_servings"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="3dp"
@@ -69,7 +69,7 @@
                 android:layout_weight="1"/>
 
             <TextView
-                android:id="@+id/tv_time"
+                android:id="@+id/tv_cardRecipe_time"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="3dp"
@@ -81,8 +81,6 @@
                 android:layout_weight="1"/>
 
         </LinearLayout>
-
-
     </LinearLayout>
 
 

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clean.R
+import com.example.clean.databinding.CardFridgeItemBinding
 import com.example.core.entites.FridgeItem
 import kotlinx.android.synthetic.main.card_fridge_item.view.*
 
@@ -17,12 +18,12 @@ class FridgeItemAdapter(private var items: List<FridgeItem>, private val action:
         notifyDataSetChanged()
     }
 
-    inner class FridgeViewHolder(view: View): RecyclerView.ViewHolder(view){
+    inner class FridgeViewHolder(private val binding: CardFridgeItemBinding): RecyclerView.ViewHolder(binding.root){
 
-        private val name = view.tv_name
-        private val amount = view.tv_amount
-        private val unit = view.tv_unit
-        private val layout = view
+        private val name = binding.tvCardFridgeItemName
+        private val amount = binding.tvCardFridgeItemAmount
+        private val unit = binding.tvCardFridgeItemUnit
+        private val layout = binding.root
         //private val layout = view.fridgeItemLayout
 
         fun bind(item: FridgeItem){
@@ -41,7 +42,7 @@ class FridgeItemAdapter(private var items: List<FridgeItem>, private val action:
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = FridgeViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.card_fridge_item, parent, false)
+        CardFridgeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )
 
     override fun getItemCount() = items.size

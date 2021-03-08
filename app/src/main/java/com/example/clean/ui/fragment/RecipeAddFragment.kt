@@ -15,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.clean.R
+import com.example.clean.databinding.FragmentRecipeAddBinding
 import com.example.clean.ui.adapter.*
 import com.example.clean.ui.adapter.decoration.MarginItemDecoration
 import com.example.clean.ui.dialog.AddRecipeItemDialog
@@ -25,8 +26,8 @@ import kotlinx.android.synthetic.main.fragment_recipe_add.*
 
 @AndroidEntryPoint
 class RecipeAddFragment : Fragment(), RecipeCategoryAction {
-
-
+    private var _binding: FragmentRecipeAddBinding? = null
+    private val binding get() = _binding!!
     private val viewModel by viewModels<RecipeAddViewModel>()
     private val itemsAdapter = RecipeItemAdapter(listOf())
     private val categoriesAdapter = RecipeCategoryAdapter(this)
@@ -37,7 +38,8 @@ class RecipeAddFragment : Fragment(), RecipeCategoryAction {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_recipe_add, container, false)
+        _binding = FragmentRecipeAddBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,9 +57,12 @@ class RecipeAddFragment : Fragment(), RecipeCategoryAction {
         viewModel.loadCategories()
         args.recipeName?.let {
             viewModel.loadRecipe(it)
-
         }
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun checkCategory(category: String) {
@@ -76,11 +81,11 @@ class RecipeAddFragment : Fragment(), RecipeCategoryAction {
         viewModel.notSelectedCategoriesFiltered.observe(viewLifecycleOwner, Observer {
             categoriesAdapter.updateCategories(it) })
         viewModel.recipe.observe(viewLifecycleOwner, Observer {
-            et_name.setText(it.name)
-            et_instructions.setText(it.description)
-            et_rating.setText(it.rating.toString())
-            et_servings.setText(it.servings.toString())
-            et_time.setText(it.cookTime.toString())
+            binding.etRecipeAddName.setText(it.name)
+            binding.etRecipeAddInstructions.setText(it.description)
+            binding.etRecipeAddRating.setText(it.rating.toString())
+            binding.etRecipeAddServings.setText(it.servings.toString())
+            binding.etRecipeAddTime.setText(it.cookTime.toString())
         })
         viewModel.isUpdateFinished.observe(viewLifecycleOwner, Observer {
             if(it){
@@ -91,16 +96,16 @@ class RecipeAddFragment : Fragment(), RecipeCategoryAction {
     }
 
     private fun setupRecyclerViews(){
-        rv_items.apply{
+        binding.rvRecipeAddItems.apply{
             layoutManager = LinearLayoutManager(context)
             adapter = itemsAdapter
         }
-        rv_categoriesRecipeAd.apply {
+        binding.rvRecipeAddCategories.apply {
             adapter = categoriesAdapter
             layoutManager = StaggeredGridLayoutManager(3,StaggeredGridLayoutManager.VERTICAL)
             addItemDecoration(MarginItemDecoration(15))
         }
-        rv_selectedCategoriesRecipeAd.apply {
+        binding.rvRecipeAddSelectedCategories.apply {
             adapter = selectedCategoriesAdapter
             layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
             addItemDecoration(MarginItemDecoration(15))
@@ -108,7 +113,7 @@ class RecipeAddFragment : Fragment(), RecipeCategoryAction {
     }
 
     private fun setupButtonsOnClicks(){
-        b_addItem.setOnClickListener {
+        b_recipeAdd_addItem.setOnClickListener {
             AddRecipeItemDialog(requireContext(), object : AddRecipeItemListener {
                 override fun onAddButtonClicked(name: String, amount: Float, unit: String) {
                     viewModel.addItem(name,amount,unit)
@@ -116,23 +121,26 @@ class RecipeAddFragment : Fragment(), RecipeCategoryAction {
             }).show()
         }
 
-        b_addCategory.setOnClickListener {
-            viewModel.checkCategory(et_searchCategory.text.toString())
+        binding.rvRecipeAddCategories.setOnClickListener {
+            viewModel.checkCategory(binding.etRecipeAddSearchCategory.text.toString())
         }
 
-        b_submit.setOnClickListener {
+        binding.bRecipeAddSubmit.setOnClickListener {
             if (!viewModel.isNameFree){
                 Toast.makeText(requireContext(), "Name of recipe already in database!", Toast.LENGTH_LONG).show()
             }
             else
-                viewModel.addRecipe(et_name.text.toString(), et_instructions.text.toString(), et_time.text.toString().toInt(),
-                    et_servings.text.toString().toInt(),et_rating.text.toString().toInt())
+                viewModel.addRecipe(binding.etRecipeAddName.text.toString(),
+                    binding.etRecipeAddInstructions.text.toString(),
+                    binding.etRecipeAddTime.text.toString().toInt(),
+                    binding.etRecipeAddServings.text.toString().toInt(),
+                    binding.etRecipeAddRating.text.toString().toInt())
             }
         }
 
 
     private fun setupCategorySearch(){
-        et_searchCategory.addTextChangedListener(object : TextWatcher{
+        binding.etRecipeAddSearchCategory.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(s: Editable?) {
                 viewModel.setCategoryFilter(s.toString())
             }
@@ -142,7 +150,7 @@ class RecipeAddFragment : Fragment(), RecipeCategoryAction {
     }
 
     private fun setupNameObserver(){
-        et_name.addTextChangedListener(object : TextWatcher{
+        binding.etRecipeAddName.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(s: Editable?) {
                 viewModel.isNameFreeSetter(s.toString())
             }

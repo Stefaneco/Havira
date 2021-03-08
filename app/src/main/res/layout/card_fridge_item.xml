@@ -8,7 +8,7 @@
     android:padding="2dp">
 
     <LinearLayout
-        android:id="@+id/layout_fridge_name"
+        android:id="@+id/ll_cardFridgeItem_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -18,7 +18,7 @@
         app:layout_constraintWidth_percent="0.75">
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/tv_cardFridgeItem_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -42,13 +42,13 @@
         android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="vertical"
-        app:layout_constraintEnd_toStartOf="@id/card_fridge_unit_layout"
-        app:layout_constraintStart_toEndOf="@+id/layout_fridge_name"
+        app:layout_constraintEnd_toStartOf="@id/ll_cardFridgeItem_unit"
+        app:layout_constraintStart_toEndOf="@+id/ll_cardFridgeItem_name"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.1">
 
         <TextView
-            android:id="@+id/tv_amount"
+            android:id="@+id/tv_cardFridgeItem_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -67,7 +67,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/card_fridge_unit_layout"
+        android:id="@+id/ll_cardFridgeItem_unit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -77,7 +77,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tv_unit"
+            android:id="@+id/tv_cardFridgeItem_unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"

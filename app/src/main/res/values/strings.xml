@@ -9,4 +9,10 @@
     <string name="rating">rating</string>
     <string name="cook_time">cook time</string>
     <string name="in_stock">in stock</string>
+    <string name="search">search</string>
+    <string name="recipes">RECIPES</string>
+    <string name="add">ADD</string>
+    <string name="cancel">CANCEL</string>
+    <string name="amount">amount</string>
+    <string name="unit">unit</string>
 </resources>

@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
-import com.example.clean.R
+import com.example.clean.databinding.FragmentFridgeBinding
 import com.example.clean.ui.adapter.*
 import com.example.clean.ui.dialog.AddInFridgeItemDialog
 import com.example.clean.ui.dialog.AddInFridgeItemListener
@@ -24,7 +24,8 @@ import kotlinx.android.synthetic.main.fragment_fridge.*
 
 @AndroidEntryPoint
 class FridgeFragment : Fragment(), FridgeItemDetailAction, RecipeCategoryAction {
-
+    private var _binding: FragmentFridgeBinding? = null
+    private val binding get() = _binding!!
     private val viewModel by viewModels<FridgeViewModel>()
     private val itemAdapter = FridgeItemAdapter(listOf(), this)
     private val categoriesAdapter = RecipeCategoryAdapter(this)
@@ -34,7 +35,8 @@ class FridgeFragment : Fragment(), FridgeItemDetailAction, RecipeCategoryAction 
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_fridge, container, false)
+        _binding = FragmentFridgeBinding.inflate(inflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,6 +55,11 @@ class FridgeFragment : Fragment(), FridgeItemDetailAction, RecipeCategoryAction 
         observeViewModel()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun observeViewModel() {
         viewModel.filteredItems.observe(viewLifecycleOwner, Observer {
             itemAdapter.updateItems(it)
@@ -66,37 +73,39 @@ class FridgeFragment : Fragment(), FridgeItemDetailAction, RecipeCategoryAction 
     }
 
     private fun setupRecyclerViews(){
-        rv_fridgeItems.layoutManager = LinearLayoutManager(context)
-        rv_fridgeItems.adapter = itemAdapter
-        rv_fridgeItems.setHasFixedSize(true)
-        rv_categoriesItems.apply {
+        binding.rvFridgeFridgeItems.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = itemAdapter
+            setHasFixedSize(true)
+        }
+        binding.rvFridgeCategoriesItems.apply {
             adapter = categoriesAdapter
             layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         }
-        rv_selectedCategoriesItems.apply {
+        binding.rvFridgeSelectedCategoriesItems.apply {
             adapter = selectedCategoriesAdapter
             layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         }
     }
 
     private fun setupButtonsOnClicks(){
-        b_addItem.setOnClickListener {
+        binding.bFridgeAddItem.setOnClickListener {
             AddInFridgeItemDialog(requireContext(), object : AddInFridgeItemListener{
                 override fun onAddButtonClicked(item: FridgeItem) {
                     viewModel.addFridgeItem(item)
                 }
             }).show()
         }
-        b_categoriesItems.setOnClickListener {
-            if(rv_categoriesItems.visibility == View.VISIBLE){
-                rv_categoriesItems.visibility = View.GONE
-                rv_selectedCategoriesItems.visibility = View.GONE
-                et_categoriesSearchItems.visibility = View.GONE
+        b_fridge_categoriesItems.setOnClickListener {
+            if(binding.rvFridgeCategoriesItems.visibility == View.VISIBLE){
+                binding.rvFridgeCategoriesItems.visibility = View.GONE
+                binding.rvFridgeSelectedCategoriesItems.visibility = View.GONE
+                binding.etFridgeCategoriesSearchItems.visibility = View.GONE
             }
             else{
-                rv_categoriesItems.visibility = View.VISIBLE
-                rv_selectedCategoriesItems.visibility = View.VISIBLE
-                et_categoriesSearchItems.visibility = View.VISIBLE
+                binding.rvFridgeCategoriesItems.visibility = View.VISIBLE
+                binding.rvFridgeSelectedCategoriesItems.visibility = View.VISIBLE
+                binding.etFridgeCategoriesSearchItems.visibility = View.VISIBLE
             }
         }
     }
@@ -115,7 +124,7 @@ class FridgeFragment : Fragment(), FridgeItemDetailAction, RecipeCategoryAction 
     }
 
     private fun setupCategorySearch(){
-        et_categoriesSearchItems.addTextChangedListener(object : TextWatcher {
+        binding.etFridgeCategoriesSearchItems.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 viewModel.setCategoryFilter(s.toString())
             }

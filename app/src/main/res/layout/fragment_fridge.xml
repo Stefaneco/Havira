@@ -7,7 +7,7 @@
     tools:context=".ui.fragment.FridgeFragment">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_fridge_screenName"
         android:layout_width="0dp"
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
@@ -18,30 +18,30 @@
         android:text="ITEMS"
         android:textColor="@color/colorFont"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/b_categoriesItems"
-        app:layout_constraintStart_toEndOf="@+id/b_addItem"
+        app:layout_constraintEnd_toStartOf="@+id/b_fridge_categoriesItems"
+        app:layout_constraintStart_toEndOf="@+id/b_fridge_addItem"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <Button
-        android:id="@+id/b_addItem"
+        android:id="@+id/b_fridge_addItem"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/ic_plus"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_fridge_screenName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="@+id/tv_fridge_screenName" />
 
     <Button
-        android:id="@+id/b_toAllItems"
+        android:id="@+id/b_fridge_toAllItems"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/trzy_kropeczki"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_fridge_screenName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="@+id/tv_fridge_screenName" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -50,10 +50,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_categoriesItems">
+        app:layout_constraintTop_toBottomOf="@+id/rv_fridge_categoriesItems">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_fridgeItems"
+            android:id="@+id/rv_fridge_fridgeItems"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -68,27 +68,27 @@
 
 
     <Button
-        android:id="@+id/b_categoriesItems"
+        android:id="@+id/b_fridge_categoriesItems"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/ic_categories"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintEnd_toStartOf="@+id/b_toAllItems"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_fridge_screenName"
+        app:layout_constraintEnd_toStartOf="@+id/b_fridge_toAllItems"
+        app:layout_constraintTop_toTopOf="@+id/tv_fridge_screenName" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_selectedCategoriesItems"
+        android:id="@+id/rv_fridge_selectedCategoriesItems"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/b_categoriesItems" />
+        app:layout_constraintTop_toBottomOf="@+id/b_fridge_categoriesItems" />
 
     <EditText
-        android:id="@+id/et_categoriesSearchItems"
+        android:id="@+id/et_fridge_categoriesSearchItems"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -96,16 +96,16 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_selectedCategoriesItems"
+        app:layout_constraintTop_toBottomOf="@+id/rv_fridge_selectedCategoriesItems"
         android:textColor="@color/colorFont"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_categoriesItems"
+        android:id="@+id/rv_fridge_categoriesItems"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_categoriesSearchItems" />
+        app:layout_constraintTop_toBottomOf="@+id/et_fridge_categoriesSearchItems" />
 </androidx.constraintlayout.widget.ConstraintLayout>
