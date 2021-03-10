@@ -8,7 +8,8 @@ import com.example.core.repository.IShoppingRepository
 import com.example.core.repository.ItemRepository
 import com.example.core.repository.RecipeRepository
 import com.example.core.repository.ShoppingRepository
-import com.example.core.usecase.*
+import com.example.core.usecase.fridge.*
+import com.example.core.usecase.recipe.*
 import com.example.core.usecase.shopping.*
 import dagger.Module
 import dagger.Provides

@@ -1,4 +1,4 @@
-package com.example.core.usecase
+package com.example.core.usecase.fridge
 
 import com.example.core.repository.ItemRepository
 

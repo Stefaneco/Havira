@@ -1,7 +1,6 @@
-package com.example.core.usecase
+package com.example.core.usecase.recipe
 
 import com.example.core.entites.Recipe
-import com.example.core.repository.IRecipeRepository
 import com.example.core.repository.RecipeRepository
 
 class GetRecipesWithGivenCategories(private val recipeRepository: RecipeRepository) {

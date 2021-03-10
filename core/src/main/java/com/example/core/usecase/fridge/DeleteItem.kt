@@ -1,8 +1,6 @@
-package com.example.core.usecase
+package com.example.core.usecase.fridge
 
 import com.example.core.entites.FridgeItem
-import com.example.core.repository.IItemRepository
-import com.example.core.repository.IRecipeRepository
 import com.example.core.repository.ItemRepository
 import com.example.core.repository.RecipeRepository
 

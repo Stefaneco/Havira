@@ -1,9 +1,8 @@
-package com.example.core.usecase
+package com.example.core.usecase.fridge
 
 import com.example.core.entites.FridgeItem
 import com.example.core.repository.ItemRepository
 import com.example.core.repository.RecipeRepository
-import sun.rmi.runtime.Log
 
 class AddItem(private val itemRepository: ItemRepository, private val recipeRepository: RecipeRepository) {
     suspend operator fun invoke(item: FridgeItem) {

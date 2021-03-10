@@ -8,6 +8,7 @@ import com.example.clean.db.entities.recipe.RecipeCategoriesEntity
 import com.example.clean.db.entities.recipe.RecipeEntity
 import com.example.clean.db.entities.recipe.RecipeItemEntity
 import com.example.core.entites.Recipe
+import com.example.core.entites.RecipeBase
 import com.example.core.entites.RecipeItem
 import com.example.core.repository.IRecipeRepository
 
@@ -18,6 +19,10 @@ class RecipeDataSource(context: Context): IRecipeRepository {
         recipeDao.addRecipeEntity(RecipeEntity.fromRecipe(recipe))
         recipeDao.upsertRecipeItems(RecipeItemEntity.fromRecipe(recipe))
         RecipeCatCrossRef.fromRecipe(recipe).let { recipeDao.addRecipeCatCrossRef(it) }
+    }
+
+    override suspend fun addRecipeBase(recipe: RecipeBase) {
+        TODO("Not yet implemented")
     }
 
     override suspend fun addRecipeCategory(category: String) {

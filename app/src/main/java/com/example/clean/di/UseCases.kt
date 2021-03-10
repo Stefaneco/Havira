@@ -1,6 +1,7 @@
 package com.example.clean.di
 
-import com.example.core.usecase.*
+import com.example.core.usecase.fridge.*
+import com.example.core.usecase.recipe.*
 import com.example.core.usecase.shopping.*
 import javax.inject.Inject
 

@@ -1,10 +1,13 @@
 package com.example.core.repository
 
 import com.example.core.entites.Recipe
+import com.example.core.entites.RecipeBase
 import com.example.core.entites.RecipeItem
 
 interface IRecipeRepository{
     suspend fun addRecipe(recipe: Recipe)
+
+    suspend fun addRecipeBase(recipe:RecipeBase)
 
     suspend fun addRecipeCategory(category: String)
 

@@ -1,9 +1,8 @@
-package com.example.core.usecase
+package com.example.core.usecase.recipe
 
 import com.example.core.entites.Recipe
 import com.example.core.repository.ItemRepository
 import com.example.core.repository.RecipeRepository
-import java.util.*
 
 class MakeRecipe(private val recipeRepository: RecipeRepository,
                  private val fridgeRepository: ItemRepository) {

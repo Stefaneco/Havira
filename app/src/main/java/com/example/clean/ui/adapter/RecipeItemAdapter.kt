@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clean.R
+import com.example.clean.databinding.CardFridgeItemBinding
 import com.example.clean.databinding.CardRecipeItemBinding
 import com.example.core.entites.RecipeItem
 import kotlinx.android.synthetic.main.card_recipe_item.view.*
@@ -16,11 +17,11 @@ class RecipeItemAdapter(private var items: List<RecipeItem>): RecyclerView.Adapt
         notifyDataSetChanged()
     }
 
-    inner class RecipeItemViewHolder(private val binding: CardRecipeItemBinding): RecyclerView.ViewHolder(binding.root){
+    inner class RecipeItemViewHolder(private val binding: CardFridgeItemBinding): RecyclerView.ViewHolder(binding.root){
 
-        private val name = binding.tvCardRecipeItemName
-        private val amount = binding.tvCardRecipeItemAmount
-        private val unit = binding.tvCardRecipeItemUnit
+        private val name = binding.tvCardFridgeItemName
+        private val amount = binding.tvCardFridgeItemAmount
+        private val unit = binding.tvCardFridgeItemUnit
 
         fun bind(item: RecipeItem){
             name.text = item.name
@@ -34,7 +35,7 @@ class RecipeItemAdapter(private var items: List<RecipeItem>): RecyclerView.Adapt
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = RecipeItemViewHolder(
-        CardRecipeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        CardFridgeItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )
 
     override fun getItemCount() = items.size

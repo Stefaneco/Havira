@@ -4,7 +4,7 @@ import com.example.core.entites.FridgeItem
 import com.example.core.repository.ItemRepository
 import com.example.core.repository.RecipeRepository
 import com.example.core.repository.ShoppingRepository
-import com.example.core.usecase.AddItem
+import com.example.core.usecase.fridge.AddItem
 
 class MoveCheckedShoppingItemsToFridge(private val shoppingRepository: ShoppingRepository,
 private val fridgeRepository: ItemRepository, private val recipeRepository: RecipeRepository) {
