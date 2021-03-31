@@ -1,5 +1,7 @@
 # Havira
 
+The idea behind the project was to explore clean architecture principles in android environment. Technologies used: Dagger hilt, Room, Navigation component.
+
 Havira has 3 main functionalities:
 
 -shopping list - products can be added manually or by selecting the recipe that you want to make. 
